@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-signature: "Caveat", cursive;
+
+  --color-brand-navy: #0d131f;
+  --color-brand-slate: #1c2434;
+  --color-brand-muted: #94a3b8;
+  --color-brand-accent: #facc15;
+  --color-brand-amber: #f59e0b;
+}
+
+/* ==========================================================================
+   DARK BLUE / OBSIDIAN THEME SECTION BACKGROUNDS
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-hero: #0f131c;
+  --bg-meals: #181f2e;
+  --bg-yoga: #0f131c;
+  --bg-events: #181f2e;
+  --bg-footer: #0f131c;
+
+  --brand-navy: #0a0e16;
+  --text-main: #dfe2ee;
+  --text-muted: #94a3b8;
+  --accent-gold: #facc15;
+  --accent-amber: #f59e0b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Section Background Helper Classes */
+.bg-section-hero {
+  background-color: var(--bg-hero);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.bg-section-meals {
+  background-color: var(--bg-meals);
+}
+
+.bg-section-yoga {
+  background-color: var(--bg-yoga);
+}
+
+.bg-section-events {
+  background-color: var(--bg-events);
+}
+
+.bg-section-footer {
+  background-color: var(--bg-footer);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-main);
+  margin: 0;
+  padding: 0;
+  background-color: #0a0e16;
+}
+
+.font-signature {
+  font-family: 'Caveat', cursive;
+}
+
+/* Dark Theme Glassmorphism Cards */
+.glass-card {
+  background: rgba(18, 24, 38, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card-sm {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Custom subtle animation */
+@keyframes slowSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slow-spin {
+  animation: slowSpin 30s linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
 }

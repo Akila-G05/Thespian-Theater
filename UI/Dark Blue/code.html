@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>fitup - Perfect Fitness Path</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700;1,800&amp;family=Caveat:wght@600&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            signature: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            brand: {
+              navy: '#0d131f',
+              slate: '#1c2434',
+              muted: '#94a3b8',
+              lavender: '#f59e0b',
+              accent: '#facc15',
+              accentGlow: '#fbbf24',
+              bgLight: '#0f131c',
+              cardBg: '#131b2e',
+              glass: 'rgba(18, 24, 38, 0.75)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="base-styling">
+    body {
+      background-color: #0a0e16;
+      color: #dfe2ee;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .glass-card {
+      background: rgba(18, 24, 38, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-card-sm {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    /* Sunburst burst styling */
+    .sunburst-icon {
+      background-image: radial-gradient(circle, #475569 1.5px, transparent 2px);
+      background-size: 8px 8px;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-amber-400 selection:text-slate-950 bg-[#0a0e16] text-[#dfe2ee]">
+<!-- BEGIN: SiteWrapper -->
+<div class="max-w-[1360px] mx-auto min-h-screen bg-[#0f131c] relative shadow-2xl overflow-hidden my-0 sm:my-4 border border-slate-800/80">
+<!-- SECTION 1 CONTAINER (Hero & Why Fitup Works) - Dark Obsidian #0f131c -->
+<div class="relative bg-[#0f131c]">
+<!-- Background Radial Gradients & Glows -->
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-b from-amber-500/10 via-yellow-600/5 to-transparent rounded-full blur-3xl pointer-events-none -z-0"></div>
+<div class="absolute top-[800px] left-[-200px] w-[600px] h-[600px] bg-gradient-to-r from-amber-600/10 to-transparent rounded-full blur-3xl pointer-events-none -z-0"></div>
+<!-- BEGIN: MainHeader -->
+<header class="relative z-20 px-8 lg:px-16 pt-8 pb-4 flex items-center justify-between" data-purpose="site-navigation">
+<!-- Logo -->
+<a class="flex items-center gap-2.5 text-2xl font-black text-white tracking-tight group" href="#">
+<span class="inline-flex items-center justify-center font-black italic text-3xl tracking-tighter text-amber-400 transform -skew-x-12">
+<svg class="w-8 h-8 fill-amber-400 inline-block" viewbox="0 0 40 40">
+<path d="M6 10 H30 L26 18 H12 L10 22 H24 L20 30 H6 Z"></path>
+</svg>
+</span>
+<span class="font-extrabold tracking-tight text-xl lowercase text-white">fitup</span>
+</a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest text-slate-300/80 uppercase">
+<a class="hover:text-white transition-colors" href="#how-it-works">HOW IT WORKS</a>
+<a class="hover:text-white transition-colors" href="#about">ABOUT</a>
+<a class="hover:text-white transition-colors" href="#start">START</a>
+<a class="hover:text-white transition-colors" href="#faq">FAQ</a>
+<a class="hover:text-white transition-colors" href="#events">EVENTS</a>
+</nav>
+<!-- Contact Button -->
+<div>
+<a class="px-5 py-2.5 rounded-full border border-slate-600/70 bg-slate-900/60 text-xs font-semibold tracking-wider text-slate-100 hover:bg-white hover:text-slate-900 hover:border-white transition duration-300 flex items-center gap-2 shadow-sm" href="#contact">
+<svg class="w-3.5 h-3.5 stroke-current" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          CONTACT US
+        </a>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroSection -->
+<section class="relative z-10 px-8 lg:px-16 pt-8 pb-20" data-purpose="hero-banner">
+<!-- Top Decorative Sunburst SVG -->
+<div class="absolute top-10 left-[42%] w-14 h-14 opacity-75 pointer-events-none">
+<svg class="w-full h-full text-amber-400/70 animate-[spin_30s_linear_infinite]" viewbox="0 0 100 100">
+<!-- Geometric Sunburst Rays -->
+<g stroke="currentColor" stroke-linecap="round" stroke-width="2.5">
+<line x1="50" x2="50" y1="5" y2="22"></line>
+<line x1="50" x2="50" y1="78" y2="95"></line>
+<line x1="5" x2="22" y1="50" y2="50"></line>
+<line x1="78" x2="95" y1="50" y2="50"></line>
+<line x1="18" x2="30" y1="18" y2="30"></line>
+<line x1="70" x2="82" y1="70" y2="82"></line>
+<line x1="18" x2="30" y1="82" y2="70"></line>
+<line x1="70" x2="82" y1="30" y2="18"></line>
+<line x1="33" x2="38" y1="10" y2="24"></line>
+<line x1="62" x2="67" y1="76" y2="90"></line>
+<line x1="67" x2="62" y1="10" y2="24"></line>
+<line x1="38" x2="33" y1="76" y2="90"></line>
+<line x1="10" x2="24" y1="33" y2="38"></line>
+<line x1="76" x2="90" y1="62" y2="67"></line>
+<line x1="10" x2="24" y1="67" y2="62"></line>
+<line x1="76" x2="90" y1="38" y2="33"></line>
+</g>
+<circle cx="50" cy="50" fill="none" r="8" stroke="currentColor" stroke-width="2"></circle>
+</svg>
+</div>
+<!-- Left Decorative Rays -->
+<div class="absolute bottom-16 left-6 w-20 h-20 opacity-40 pointer-events-none">
+<svg class="w-full h-full text-slate-500" viewbox="0 0 100 100">
+<g stroke="currentColor" stroke-linecap="round" stroke-width="2">
+<line x1="50" x2="50" y1="10" y2="30"></line>
+<line x1="50" x2="50" y1="70" y2="90"></line>
+<line x1="10" x2="30" y1="50" y2="50"></line>
+<line x1="70" x2="90" y1="50" y2="50"></line>
+<line x1="22" x2="36" y1="22" y2="36"></line>
+<line x1="64" x2="78" y1="64" y2="78"></line>
+<line x1="22" x2="36" y1="78" y2="64"></line>
+<line x1="64" x2="78" y1="36" y2="22"></line>
+</g>
+</svg>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Hero Left Column Content -->
+<div class="lg:col-span-6 z-10">
+<h1 class="text-5xl sm:text-6xl xl:text-[68px] leading-[1.08] font-extrabold text-white tracking-tight mb-5">
+            Prefect<br/>
+            Fitness Path<br/>
+            With <span class="text-yellow-400 drop-shadow-[0_0_25px_rgba(250,204,21,0.45)]">fitup</span>
+</h1>
+<p class="text-sm sm:text-base text-slate-400 max-w-md font-medium leading-relaxed mb-8">
+            Unlock your full potential with tailored training programs, all crafted to help you achieve your fitness goals
+          </p>
+<!-- Action Buttons & Socials -->
+<div class="flex flex-wrap items-center gap-6 mb-16">
+<button class="px-7 py-3 rounded-full bg-white text-slate-950 font-bold text-xs tracking-wider shadow-lg shadow-white/10 hover:bg-yellow-400 hover:text-slate-950 transition uppercase duration-200">
+              GET STARTED
+            </button>
+<div class="flex items-center gap-3 text-slate-300">
+<span class="text-xs font-semibold text-slate-400">Join Our Community</span>
+<div class="flex items-center gap-2 text-xs">
+<a class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 text-slate-200 flex items-center justify-center hover:bg-yellow-400 hover:text-slate-950 transition" href="#"><i class="fa-brands fa-medium text-[10px]"></i></a>
+<a class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 text-slate-200 flex items-center justify-center hover:bg-yellow-400 hover:text-slate-950 transition" href="#"><i class="fa-brands fa-dribbble text-[10px]"></i></a>
+<a class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 text-slate-200 flex items-center justify-center hover:bg-yellow-400 hover:text-slate-950 transition" href="#"><i class="fa-brands fa-facebook-f text-[10px]"></i></a>
+<a class="w-6 h-6 rounded-full bg-slate-800 border border-slate-700 text-slate-200 flex items-center justify-center hover:bg-yellow-400 hover:text-slate-950 transition" href="#"><i class="fa-brands fa-twitter text-[10px]"></i></a>
+</div>
+</div>
+</div>
+<!-- Statistics Counters -->
+<div class="flex items-start gap-12 pt-2 border-t border-slate-800">
+<div>
+<div class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">500k+</div>
+<p class="text-xs text-slate-400 font-medium max-w-[140px] mt-1 leading-snug">Personalized training programs delivered</p>
+</div>
+<div>
+<div class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">10k+</div>
+<p class="text-xs text-slate-400 font-medium max-w-[140px] mt-1 leading-snug">Active members achieving results</p>
+</div>
+</div>
+</div>
+<!-- Hero Right Column Image / Composition -->
+<div class="lg:col-span-6 relative flex justify-center items-center">
+<!-- Outer Rounded Container for Hero Model -->
+<div class="relative w-full max-w-[440px] h-[540px] rounded-[55px] overflow-hidden glass-card p-2 shadow-2xl border border-slate-700/60 shadow-amber-950/20">
+<!-- Hero Model Image with blue sports zip and stretch pose -->
+<img alt="Athletic woman stretching in blue fitness jacket" class="w-full h-full object-cover rounded-[48px] brightness-95 contrast-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjZP2NhSw6dLwEr0_716m0bb-RflmNBk1UKlpgANL0BoYDzh4SALQkkUx0qi6Jxztxb1dpCcoypSRRMSHRGDvk9IDrPVxphF46JFdiG0PRjgEvyJQFx8xx6W44aiYhQSNeONrv37IAU5erwVNvZcYvnmV4cquYByziO3pJL7Nw_KPPLXzV7fS98F52HI-FaSn-KxBeBFc-Sa5z1ArshiYZQaGT0KQgwS2H0m5VWreVgjc7q9F_q_vJ"/>
+<!-- Body Position Tracking Dot & Line Overlay -->
+<div class="absolute bottom-[28%] right-[28%] flex items-center pointer-events-none">
+<span class="relative flex h-3.5 w-3.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-white border-2 border-yellow-400 shadow-sm"></span>
+</span>
+<div class="w-16 h-[1.5px] bg-yellow-300/80 ml-1"></div>
+</div>
+<div class="absolute bottom-[38%] left-[34%] flex items-center pointer-events-none">
+<span class="relative flex h-3.5 w-3.5">
+<span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-white border-2 border-yellow-400 shadow-sm"></span>
+</span>
+</div>
+</div>
+<!-- Glassmorphism Floating Badge 1: Weekly Overview Bar Chart (Top Right) -->
+<div class="absolute -top-4 right-4 sm:right-6 glass-card-sm p-4 rounded-3xl shadow-2xl border border-slate-700/70 w-44 z-20" data-purpose="stat-card-weekly">
+<div class="text-[10px] font-bold text-slate-400 tracking-wider">Weekly Overview</div>
+<div class="text-[9px] text-slate-500 mb-2">Apr 10 - Apr 17</div>
+<!-- Mini Bar Chart -->
+<div class="flex items-end justify-between h-11 gap-1.5 px-1 pb-1">
+<div class="w-2.5 bg-slate-800 rounded-full h-[40%]"></div>
+<div class="w-2.5 bg-slate-800 rounded-full h-[65%]"></div>
+<div class="w-2.5 bg-slate-800 rounded-full h-[35%]"></div>
+<div class="w-2.5 bg-slate-700 rounded-full h-[85%]"></div>
+<div class="w-2.5 bg-yellow-400 rounded-full h-[95%] shadow-[0_0_10px_rgba(250,204,21,0.6)]"></div>
+<div class="w-2.5 bg-slate-800 rounded-full h-[55%]"></div>
+<div class="w-2.5 bg-slate-800 rounded-full h-[70%]"></div>
+</div>
+<div class="flex justify-between text-[8px] text-slate-500 font-bold px-0.5 mt-1 uppercase">
+<span class="">m</span><span class="">t</span><span class="">w</span><span class="">t</span><span class="text-yellow-400">f</span><span class="">s</span><span class="">s</span>
+</div>
+<p class="text-[9px] font-bold text-white mt-2 text-center">Peak Performance<br/><span class="text-slate-400 font-normal">On Tuesday!</span></p>
+</div>
+<!-- Glassmorphism Floating Badge 2: Members Joined Avatar Stack (Bottom Left) -->
+<div class="absolute bottom-8 -left-4 sm:left-4 glass-card-sm py-2 px-4 rounded-2xl shadow-2xl border border-slate-700/70 flex items-center gap-3 z-20" data-purpose="stat-card-members">
+<div>
+<div class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Members Joined</div>
+<div class="flex items-center -space-x-2 mt-1">
+<img alt="Avatar 1" class="w-6 h-6 rounded-full border-2 border-slate-900 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1SKNuecDQO0DNTnFQO2mTVFTWspTqGBJTU-3t3dVLgZrdEsEuSl4ljUljJzq1ooRI9dFVeSHDW_v4GDGiBGKagQwxRmqVj7WyR0ydcJgZG57y-CKfZLiIaBoXwblt2KmAli0KIBkstlv_UFP6CI38OGxZtY2qqQKo2slakYaVrsRgFz_gfTB1GwEDuynTS_QLhR85TSjpEa7t31Fz2hElHJ_7Hvf4w3UACrqJk2ez5rI3JhbPdELR"/>
+<img alt="Avatar 2" class="w-6 h-6 rounded-full border-2 border-slate-900 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxs57oCyTx3fPDtF8oyebR9s1oczEcCEyGH1bIMZ4E3hiSHVCVl1lNrar9Hf0SyZILbXbhgKe-CR69vT6gwHrerYwd_LmhqsPomPcilbtraFL7aGjDXu63VRf2B5YMbm_FUcWNBFpVlwNAK-8Rh4K6x1JKlGty_R5eqEQnVTCJP7Y6JEZxcwt64nDgOimCQbHiBF-O3l1oNqrtQSObmNUAPGvYof8jgLku-rU6Z9dkfQr2WbhLaQdy"/>
+<img alt="Avatar 3" class="w-6 h-6 rounded-full border-2 border-slate-900 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC540dMGBIC9FVCiFdFFFJCoHHTCs2xFQpMDyF8ioF5vjfQ8JirlE-I5x3l0H0wrbocCPlw4uBY6J9wtFmYzrei3_KikYcbWYWEVRcmi3yTDJRpP9KERj1P-AHKzj6souen4ESlBujZgP3FaUs3KNTzoTG89pUjkdnG96RHrvsZk9zjdeK0Ruj9gLxTLxMu70SxyC_lB9vuxPLHDDhaql8kku54Do-bJ7nRgwgRDTSZe7zm-TNjZnyc"/>
+<img alt="Avatar 4" class="w-6 h-6 rounded-full border-2 border-slate-900 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAejFLskcOf5iGc98miM3sKcTtGkFe744fMMkVedDw1rC9-paGOQIJZe20IeAcvsn38hKrigCEZSp3-VxzntxgxshXk1qzBFLYQ7gMhP3uU81vQKtFQgOEVIa9Yc7AWD3eNMAfxBKjDcvi98UWZTz01bioulBg0bwksDeO_yc0nnG1LtfKBB45gamdnrHCaLCteKSIfzrPdcCNGK5rUYffSq3Tp-RnY89trQps5jRBQ86qaAFhLZuC"/>
+</div>
+</div>
+<span class="text-[10px] font-bold text-yellow-400 bg-yellow-950/60 border border-yellow-700/60 px-2 py-1 rounded-full">12k+ more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: WhyFitupWorks -->
+<section class="relative z-10 px-8 lg:px-16 py-12" data-purpose="science-section" id="how-it-works">
+<div class="glass-card rounded-[42px] p-8 lg:p-12 border border-slate-700/60 shadow-2xl relative overflow-hidden" style="background: rgba(18, 24, 38, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Running Legs Visual with Kinetic Lines -->
+<div class="lg:col-span-5 relative flex justify-center">
+<div class="relative w-full max-w-[340px] h-[340px] rounded-3xl overflow-hidden bg-gradient-to-t from-slate-900 to-slate-800 flex items-center justify-center border border-slate-700/50 shadow-inner">
+<img alt="Runner legs in cyan sneakers with motion tracking" class="w-full h-full object-cover object-center brightness-95" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJEknF_jukRY76APXOnyl854Ya2n6cuk5varz6PcECkOIMbU7vcDl6KBU_XCpT-BgcZ_e0yWoVyZtgnrgUCuC5hKD1Jea8I12PhH_U93ecf5j8Ceb0VtC4z79CwKGtGdJ5NHwyNNMdkzaRFJZ25xrxvZtkPpNceA78b2AeeHP7M6ycWPca14dS7E7QudToyTUaHvxvwQLM85Ax_iy4Qwq6Bt9GY9E-PLqnDJ2nX75YGznSI3_Dfq50"/>
+<!-- Subtle anatomical lines indicator overlay -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-90" viewbox="0 0 300 300">
+<circle cx="120" cy="180" fill="#facc15" r="4"></circle>
+<circle cx="180" cy="220" fill="#facc15" r="4"></circle>
+<path d="M 120 180 L 150 140 L 180 220" fill="none" stroke="#facc15" stroke-dasharray="3,3" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- Explanation & Health Cards -->
+<div class="lg:col-span-7 flex flex-col justify-center">
+<!-- Section Badge -->
+<div class="inline-block self-start px-4 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 font-bold text-[10px] tracking-wider uppercase mb-4">
+              WHY FITUP WORKS
+            </div>
+<p class="text-sm sm:text-base text-slate-300 font-medium leading-relaxed mb-8 max-w-lg">
+              we go beyond fitness by empowering you with insights and guidance to boost your blood cell production, enhance circulation, and improve heart health
+            </p>
+<!-- Three Anatomical Feature Cards -->
+<div class="grid grid-cols-3 gap-4 max-w-md">
+<!-- Organ Card: Cellular / Scan -->
+<div class="bg-slate-800/60 rounded-2xl p-4 flex flex-col items-center justify-center aspect-square shadow-sm border border-slate-700/60 hover:border-yellow-400/40 transition">
+<img alt="3D Organ Liver Anatomical Model" class="w-16 h-16 object-contain filter drop-shadow-[0_0_8px_rgba(250,204,21,0.25)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSYphUb7DjtMtAzgaUhoD8v_12Ekjmoxlq7QInerOuD0FAdqjRKXJYicitaOquRgFg9Taxu8Kla8uqerucg2jszNesk0PYG9zr_C13S9iHi2amSp0X-r4sRkAETbekOHyCop4QxeQgtheJh-BIiC2uS-JYXQ_mwPKYK0tRqSYd83cG5az9pKS4gL5AFxV5tCZoivuzbdPNUu1B5P7--WoIggVGeheTD0uchGqjuJsc-80dL5f_icFj"/>
+</div>
+<!-- Organ Card: 3D Heart -->
+<div class="bg-slate-800/60 rounded-2xl p-4 flex flex-col items-center justify-center aspect-square shadow-sm border border-slate-700/60 relative group cursor-pointer hover:border-yellow-400/50 transition">
+<img alt="3D Healthy Heart Organ Model" class="w-16 h-16 object-contain filter drop-shadow-[0_0_10px_rgba(244,63,94,0.3)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDDSFiGOIzSK0zdq54Qm07161E18_aq41wa_kMmPf-Qgt2qk5nMDF71o4ajNYAxDPu90RSlmecJmllmk3Tp6BZBhuhGLQtLlOg387wZIkVUERRoah-dL147pR0-S68DyM8Zgk0-WrfqWWfuiX554w6NzL4vA-ypgrrCC1g0j_gCMj8JFhAHjrgQoGYSs-yQ3h3dy5em6aAKUUyeU0pvH7xE6bjAYCLSajpak70JRverEDe1ASBvhwM"/>
+<div class="absolute -bottom-2 bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md shadow-yellow-400/30">
+<span class="">healthy heart</span>
+<i class="fa-solid fa-arrow-up-right text-[7px]"></i>
+</div>
+</div>
+<!-- Organ Card: Blood Cell -->
+<div class="bg-slate-800/60 rounded-2xl p-4 flex flex-col items-center justify-center aspect-square shadow-sm border border-slate-700/60 hover:border-yellow-400/40 transition">
+<img alt="3D Red Blood Cell Erythrocyte Model" class="w-16 h-16 object-contain filter drop-shadow-[0_0_8px_rgba(239,68,68,0.25)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3lUDjLQT53rHlz2s9Ltlb5e-6tH_AZa2uAJC_CeUoXlqdW33BF9Jho6rYzisjf6z0UQ3jOehFOOlxdJ8CEUennZZIeI8pgWtMS-iUz1AVxql8Ep54xxRdW0KwdNb-pXuXE8m83sBn-o7hc_jpRtiHhzy9EmGlw69puz9MvyFfXyuN084IavcO62Lejh8gIeQXMKj4jkTKqbf7t7sSqk_FV3XpiPQsSzmQ-ty85QiMNodCLFR4CbGI"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: WhyFitupWorks -->
+</div>
+<!-- SECTION 2 CONTAINER ("Balanced Meals") - Deep Slate/Indigo Tone #181F2E -->
+<div class="relative bg-[#181F2E] border-y border-slate-800/80">
+<!-- Decorative subtle radial glow -->
+<div class="absolute top-1/2 right-10 -translate-y-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+<!-- BEGIN: BalancedMealsSection -->
+<section class="relative z-10 px-8 lg:px-16 py-16" data-purpose="nutrition-section" id="about">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left Content -->
+<div class="lg:col-span-6">
+<div class="flex items-center gap-4 mb-4">
+<h2 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              Fit your body with<br/>
+              balanced <span class="text-yellow-400 font-semibold italic drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">meals</span>
+</h2>
+<!-- Sunburst Icon Indicator -->
+<div class="w-12 h-12 flex-shrink-0">
+<svg class="w-full h-full text-slate-500" viewbox="0 0 100 100">
+<g stroke="currentColor" stroke-linecap="round" stroke-width="2.5">
+<line x1="50" x2="50" y1="5" y2="25"></line>
+<line x1="50" x2="50" y1="75" y2="95"></line>
+<line x1="5" x2="25" y1="50" y2="50"></line>
+<line x1="75" x2="95" y1="50" y2="50"></line>
+<line x1="18" x2="32" y1="18" y2="32"></line>
+<line x1="68" x2="82" y1="68" y2="82"></line>
+<line x1="18" x2="32" y1="82" y2="68"></line>
+<line x1="68" x2="82" y1="32" y2="18"></line>
+</g>
+<circle cx="50" cy="50" fill="none" r="12" stroke="currentColor" stroke-width="2.5"></circle>
+</svg>
+</div>
+</div>
+<p class="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-8 max-w-md">
+            With options for every dietary preference—including vegan, non-vegan, and allergy-friendly choices—our recipes are designed to help you enjoy delicious, nutritious meals while staying on track with your goals
+          </p>
+<!-- Meal Toggles Cards -->
+<div class="flex items-center gap-4 mb-10">
+<!-- Non Vegan Option (Active) -->
+<div class="bg-gradient-to-r from-yellow-400 via-amber-400 to-amber-500 text-slate-950 rounded-2xl p-4 w-40 shadow-lg shadow-yellow-500/25 cursor-pointer transform hover:-translate-y-0.5 transition">
+<div class="flex items-center gap-2 mb-3">
+<i class="fa-solid fa-drumstick-bite text-xs text-slate-950"></i>
+<span class="text-xs font-bold text-slate-950">Non Vegan</span>
+</div>
+<div class="inline-flex items-center gap-1.5 text-[9px] font-bold bg-slate-950/20 px-2.5 py-1 rounded-full text-slate-950">
+                Start Journey →
+              </div>
+</div>
+<!-- Vegan Option (Glass) -->
+<div class="glass-card rounded-2xl p-4 w-40 cursor-pointer hover:bg-slate-800/80 transition flex flex-col justify-center border border-slate-700/60">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-leaf text-xs text-emerald-400"></i>
+<span class="text-xs font-bold text-slate-200">Vegan</span>
+</div>
+</div>
+</div>
+<!-- Designer Signature -->
+<div class="pt-2">
+<div class="font-signature text-2xl text-slate-300 leading-none tracking-wide">Hamida</div>
+<div class="text-[10px] text-slate-500 font-medium tracking-tight mt-1">Designer Of fitup</div>
+</div>
+</div>
+<!-- Right Content: Bowl of Balanced Meal with Calorie Card -->
+<div class="lg:col-span-6 relative flex justify-center">
+<div class="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
+<!-- Food Bowl Image -->
+<img alt="Hands holding a fresh healthy bowl with boiled eggs, blueberries, seeds, and avocado" class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-slate-800 brightness-95" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTlntavCk1_YecckDUtKQYgblvw55vOxYySQnWFPucgAp7jLzieD0i68HOgYjaaPIRlYA2fP2jv4BitIpn0oK3FnKZeFcL6J3oViWc5-sX7I0PcY9ozZ10AVfDqFqNydRdJqUfwJ6DEYlMSwCER0FU-drnRxx7D4u1qvwoNyd4rkEFmvQG7IzhOug-somw--tZx0cRT9j7YTFFE-7ub6NiWHPCfxus31KeluNVvEH5_lSvMA7LsZa8"/>
+<!-- Glassmorphism Floating Calorie Card -->
+<div class="absolute top-2 right-0 sm:right-4 glass-card-sm px-5 py-3 rounded-2xl shadow-2xl border border-slate-700/80 w-52 z-10" data-purpose="calorie-counter-card">
+<div class="flex items-center justify-between text-xs mb-1">
+<span class="font-bold text-white">Calories</span>
+<span class="text-[11px] font-semibold text-slate-400"><strong class="text-yellow-400">2091</strong>/5018</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mb-2">
+<div class="bg-yellow-400 h-full w-[45%] rounded-full shadow-[0_0_10px_rgba(250,204,21,0.7)]"></div>
+</div>
+<p class="text-[9px] text-slate-400 font-medium">Stay on track with meal guidance</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: BalancedMealsSection -->
+</div>
+<!-- SECTION 3 CONTAINER ("Yoga Style") - Alternates back to Dark Blue #0f131c -->
+<div class="relative bg-[#0f131c]">
+<!-- Subtle decorative background gradient -->
+<div class="absolute top-1/3 left-[-150px] w-[500px] h-[500px] bg-gradient-to-r from-amber-500/5 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+<!-- BEGIN: YogaStyleSection -->
+<section class="relative z-10 px-8 lg:px-16 py-16" data-purpose="yoga-section" id="start">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h2 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Find Your Perfect<br/>
+            Yoga <span class="text-yellow-400 font-semibold drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">style</span>
+</h2>
+</div>
+<p class="text-xs sm:text-sm text-slate-400 font-medium max-w-sm">
+          Explore different yoga styles tailored to your needs, from flexibility and balance to relaxation and strength
+        </p>
+</div>
+<!-- 2x3 Grid of Yoga Styles -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+<!-- Style Card 1: Muscle Stretch -->
+<div class="glass-card rounded-3xl p-6 relative h-[250px] flex flex-col justify-between overflow-hidden group shadow-sm hover:border-yellow-400/40 hover:shadow-lg transition">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 font-black text-6xl tracking-widest text-white select-none pointer-events-none">
+            YOGA
+          </div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<img alt="Muscle Stretch Yoga Pose" class="h-36 object-contain object-center transform group-hover:scale-105 transition duration-300 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxNusCQZsS2gwH8dO_qlU9JGu7yUmXz6f1VKUkc4S5_4f3dkPdq4rKNkThV8a-Dn5hsOB7rQtWDRxnx5rwhSTmxcyOg5CjaWlSIzg9bHHnQsFjEPi_YlXC6gSujttL5UrxDnZFasSyqy-laql1udcPeMtJYNSCUoexXProzG88qJ3lmML7XYGCqsn7XLwfYPZQqSM_45bcYPFJ-am5gFdmRqQlsQFFAdiDf-5lcYX9o8FIUqPyx5yt"/>
+</div>
+<div class="mt-auto relative z-10 flex justify-center">
+<button class="glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm hover:bg-white hover:text-slate-950 transition flex items-center gap-1.5 border border-slate-700/80">
+              Muscle Stretch →
+            </button>
+</div>
+</div>
+<!-- Style Card 2: Relaxation Stretch -->
+<div class="glass-card rounded-3xl p-6 relative h-[250px] flex flex-col justify-between overflow-hidden group shadow-sm hover:border-yellow-400/40 hover:shadow-lg transition">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 font-black text-6xl tracking-widest text-white select-none pointer-events-none">
+            YOGA
+          </div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<img alt="Relaxation Stretch Yoga Meditation" class="h-36 object-contain object-center transform group-hover:scale-105 transition duration-300 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUOWeh-dJ2-49HXiYeIS54GUegC32sm3_4ekRXAPWnl8rp065WBt5lRawTUfCPeZ1yUSOxG03m8ilzhtqrF6kOn5K2Si5Sxodfu1pzIHKQngzCNmXAx2Ab7Smnt0tS7OyYPirUbbLjplh61im_rzSx_UtMJOeIZInb4TWdh8d0NuRyuo-Amk7CtADrheclme7uWb0FbNPipi5vE4dP3F6RxJZvfLmEl0J9sLIXCLSJ9w67qc-8rMpl"/>
+</div>
+<div class="mt-auto relative z-10 flex justify-center">
+<button class="glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm hover:bg-white hover:text-slate-950 transition flex items-center gap-1.5 border border-slate-700/80">
+              Relaxation Stretch →
+            </button>
+</div>
+</div>
+<!-- Style Card 3: Balance Booster -->
+<div class="glass-card rounded-3xl p-6 relative h-[250px] flex flex-col justify-between overflow-hidden group shadow-sm hover:border-yellow-400/40 hover:shadow-lg transition">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 font-black text-6xl tracking-widest text-white select-none pointer-events-none">
+            YOGA
+          </div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<img alt="Balance Booster Yoga Arch Pose" class="h-36 object-contain object-center transform group-hover:scale-105 transition duration-300 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM1q1rjuM9UqmN4lt-LWTm4fC2VlLTpLKFMh_v_YjVvyZSlDYNC5npbYd_dtw0katpKx22mhsuRdmGIO1cg8mgC0H1z5KXYUW9BYgfqk6JXMSS4wRG8wQkU_Ww_0PHIQdyE4YriWSUGoJrnkKMi31qx136j2FZmpLrBaXi02H-qPgZpH_CyKVTSVNTm65cBUgCHQPbtEL6kEyGQtUAaW0zwhV56udEQZEHpwnJ6D3kzDF2UkgKHNUk"/>
+</div>
+<div class="mt-auto relative z-10 flex justify-center">
+<button class="glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm hover:bg-white hover:text-slate-950 transition flex items-center gap-1.5 border border-slate-700/80">
+              Balance Booster →
+            </button>
+</div>
+</div>
+<!-- Style Card 4: Flexibility Enhancer -->
+<div class="glass-card rounded-3xl p-6 relative h-[250px] flex flex-col justify-between overflow-hidden group shadow-sm hover:border-yellow-400/40 hover:shadow-lg transition">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 font-black text-6xl tracking-widest text-white select-none pointer-events-none">
+            YOGA
+          </div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<img alt="Flexibility Enhancer Seated Yoga Pose" class="h-36 object-contain object-center transform group-hover:scale-105 transition duration-300 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVNDOytV18ixb6KRcn8-mh7aIXe85JPDUFToGxbeK6fF10sC9SBFyOqpUI73GPkT4Y0ZdzHdYcQlzOy98MAHW1JabDC2e763Ozc9YqcNrn8I6yfExLJw8FS_zKLKXEbw6AfR8PbcMpFIjqFfuxXAU0sq9rmkl7gbT41hD29zz-zCtEW0NO31La8phNj7u9nD2UpdE45eI7x3XDCUu72OUWuReHmunbw5IZC7gacmTupujJKK8DW1DP"/>
+</div>
+<div class="mt-auto relative z-10 flex justify-center">
+<button class="glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm hover:bg-white hover:text-slate-950 transition flex items-center gap-1.5 border border-slate-700/80">
+              Flexibility Enhancer →
+            </button>
+</div>
+</div>
+<!-- Style Card 5: Full-Body Stretch -->
+<div class="glass-card rounded-3xl p-6 relative h-[250px] flex flex-col justify-between overflow-hidden group shadow-sm hover:border-yellow-400/40 hover:shadow-lg transition">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 font-black text-6xl tracking-widest text-white select-none pointer-events-none">
+            YOGA
+          </div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<img alt="Full-Body Stretch Cobra Pose" class="h-36 object-contain object-center transform group-hover:scale-105 transition duration-300 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvRzcfJ1OiTGIZul4EogjE-p0DsvY8eYZuNbVjLMXWl1De7ZhwxD73kTjLF6fRxVyQFlRclJ_q0ulMuw_biY5SGjKoD1I0yNDN1KhntxzaARQrVz1BTl48W5smvuLLLwDyQWqz7HCFg2xDtZ8JCS_wadMbEYQwvjByPYn_mvNiN8dgUH5Y0IuqQJbcIyDjFjrCJMYxW02Hw51UrjvBepNfbxKnd3adcd8CXWtph_h681QaztfeXGcG"/>
+</div>
+<div class="mt-auto relative z-10 flex justify-center">
+<button class="glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm hover:bg-white hover:text-slate-950 transition flex items-center gap-1.5 border border-slate-700/80">
+              Full-Body Stretch →
+            </button>
+</div>
+</div>
+<!-- Style Card 6: Strength Flow -->
+<div class="glass-card rounded-3xl p-6 relative h-[250px] flex flex-col justify-between overflow-hidden group shadow-sm hover:border-yellow-400/40 hover:shadow-lg transition">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 font-black text-6xl tracking-widest text-white select-none pointer-events-none">
+            YOGA
+          </div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<img alt="Strength Flow Inverted Yoga Pose" class="h-36 object-contain object-center transform group-hover:scale-105 transition duration-300 brightness-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUX7KhlyrTqOP8UojEyviO6FFfsXb5JrpVVMIutkycL5kWEHLfYZy8U69n-1ujet7-Vj4KMLPViT85sNbTFqFU5wUkHIplqw7Pva6abehpERy_2z72qKNv8Slqvde05Mb8U8AePVql1c04oADrZr_6KHaoe4WBLDDoXT1YB5PfJcLnPNVcFzi74dazaHbaGSUDh2hP5YeSA6GNoXJWCPHUqi5MAxi2K48D1_FczSbNbJ53CJmOzHJF"/>
+</div>
+<div class="mt-auto relative z-10 flex justify-center">
+<button class="glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-white shadow-sm hover:bg-white hover:text-slate-950 transition flex items-center gap-1.5 border border-slate-700/80">
+              Strength Flow →
+            </button>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="flex justify-center">
+<button class="bg-white text-slate-950 text-[11px] font-bold tracking-widest uppercase px-8 py-3 rounded-full hover:bg-yellow-400 transition shadow-lg shadow-white/5">
+          CHECK ALL
+        </button>
+</div>
+</section>
+<!-- END: YogaStyleSection -->
+</div>
+<!-- SECTION 4 CONTAINER ("Exhibition & Events") - Matches Section 2 Deep Slate/Indigo Tone #181F2E -->
+<div class="relative bg-[#181F2E] border-t border-slate-800/80">
+<!-- BEGIN: ExhibitionTicker -->
+<section class="relative z-10 py-6 border-b border-slate-800/80 overflow-hidden bg-slate-950/30" data-purpose="repeating-banner">
+<div class="flex items-center justify-around whitespace-nowrap text-3xl sm:text-4xl font-extrabold text-white tracking-tight select-none">
+<span class="opacity-40">hibition</span>
+<div class="w-8 h-8 opacity-60">
+<svg class="w-full h-full text-amber-400 animate-[spin_20s_linear_infinite]" viewbox="0 0 100 100">
+<g stroke="currentColor" stroke-linecap="round" stroke-width="3">
+<line x1="50" x2="50" y1="5" y2="25"></line><line x1="50" x2="50" y1="75" y2="95"></line>
+<line x1="5" x2="25" y1="50" y2="50"></line><line x1="75" x2="95" y1="50" y2="50"></line>
+<line x1="18" x2="32" y1="18" y2="32"></line><line x1="68" x2="82" y1="68" y2="82"></line>
+<line x1="18" x2="32" y1="82" y2="68"></line><line x1="68" x2="82" y1="32" y2="18"></line>
+</g>
+</svg>
+</div>
+<span class="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">exhibition</span>
+<div class="w-8 h-8 opacity-60">
+<svg class="w-full h-full text-amber-400 animate-[spin_20s_linear_infinite]" viewbox="0 0 100 100">
+<g stroke="currentColor" stroke-linecap="round" stroke-width="3">
+<line x1="50" x2="50" y1="5" y2="25"></line><line x1="50" x2="50" y1="75" y2="95"></line>
+<line x1="5" x2="25" y1="50" y2="50"></line><line x1="75" x2="95" y1="50" y2="50"></line>
+<line x1="18" x2="32" y1="18" y2="32"></line><line x1="68" x2="82" y1="68" y2="82"></line>
+<line x1="18" x2="32" y1="82" y2="68"></line><line x1="68" x2="82" y1="32" y2="18"></line>
+</g>
+</svg>
+</div>
+<span class="opacity-40">exhibiti</span>
+</div>
+</section>
+<!-- END: ExhibitionTicker -->
+<!-- BEGIN: EventsListSection -->
+<section class="relative z-10 px-8 lg:px-16 py-12 divide-y divide-slate-800" data-purpose="event-schedule" id="events">
+<!-- Event Item 01 -->
+<div class="py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-slate-900/40 px-4 rounded-2xl transition">
+<div class="flex items-baseline gap-8">
+<span class="text-xs font-bold text-slate-500">01</span>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            fitup wellness<br/>expo
+          </h3>
+</div>
+<div class="text-xs font-medium text-slate-400 md:text-center">
+          full-day event 01.03.2025<br/>
+<span class="text-slate-500">(hamida stadium)</span>
+</div>
+<div>
+<button class="px-6 py-2 rounded-full border border-slate-700 bg-slate-900/60 text-xs font-semibold text-slate-200 hover:border-yellow-400 hover:text-yellow-400 hover:bg-slate-800 transition whitespace-nowrap">
+            Reserve Your Spot
+          </button>
+</div>
+</div>
+<!-- Event Item 02 -->
+<div class="py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-slate-900/40 px-4 rounded-2xl transition">
+<div class="flex items-baseline gap-8">
+<span class="text-xs font-bold text-slate-500">02</span>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            mind balance<br/>retreat
+          </h3>
+</div>
+<div class="text-xs font-medium text-slate-400 md:text-center">
+          full-day event 08.03.2025<br/>
+<span class="text-slate-500">(hamida stadium)</span>
+</div>
+<div>
+<button class="px-6 py-2 rounded-full border border-slate-700 bg-slate-900/60 text-xs font-semibold text-slate-200 hover:border-yellow-400 hover:text-yellow-400 hover:bg-slate-800 transition whitespace-nowrap">
+            Reserve Your Spot
+          </button>
+</div>
+</div>
+<!-- Event Item 03 -->
+<div class="py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-slate-900/40 px-4 rounded-2xl transition">
+<div class="flex items-baseline gap-8">
+<span class="text-xs font-bold text-slate-500">03</span>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            training<br/>workshop
+          </h3>
+</div>
+<div class="text-xs font-medium text-slate-400 md:text-center">
+          full day workshop 14.04.2025<br/>
+<span class="text-slate-500">(hamida stadium)</span>
+</div>
+<div>
+<button class="px-6 py-2 rounded-full border border-slate-700 bg-slate-900/60 text-xs font-semibold text-slate-200 hover:border-yellow-400 hover:text-yellow-400 hover:bg-slate-800 transition whitespace-nowrap">
+            Reserve Your Spot
+          </button>
+</div>
+</div>
+<!-- Event Item 04 -->
+<div class="py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-slate-900/40 px-4 rounded-2xl transition">
+<div class="flex items-baseline gap-8">
+<span class="text-xs font-bold text-slate-500">04</span>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            meal planning<br/>seminar
+          </h3>
+</div>
+<div class="text-xs font-medium text-slate-400 md:text-center">
+          full day seminar 23.04.2025<br/>
+<span class="text-slate-500">(hamida stadium)</span>
+</div>
+<div>
+<button class="px-6 py-2 rounded-full border border-slate-700 bg-slate-900/60 text-xs font-semibold text-slate-200 hover:border-yellow-400 hover:text-yellow-400 hover:bg-slate-800 transition whitespace-nowrap">
+            Reserve Your Spot
+          </button>
+</div>
+</div>
+</section>
+<!-- END: EventsListSection -->
+</div>
+<!-- SECTION 5 CONTAINER (Footer) - Alternates back to Dark Blue #0f131c -->
+<footer class="relative z-10 px-8 lg:px-16 pt-16 pb-12 overflow-hidden bg-[#0f131c] border-t border-slate-800/80" data-purpose="site-footer">
+<!-- Top Decorative Copyright -->
+<div class="flex justify-end mb-8">
+<p class="text-[11px] font-semibold text-slate-500 tracking-tight">
+          2024 all right reserves fitup.com
+        </p>
+</div>
+<!-- Large Stylized Fitup Brand Logo Display -->
+<div class="relative flex items-center justify-between select-none">
+<!-- Left Stylized Ray / Sunburst Background Fragment -->
+<div class="absolute -bottom-10 -left-12 w-48 h-48 opacity-20 pointer-events-none">
+<svg class="w-full h-full text-amber-400" viewbox="0 0 100 100">
+<g stroke="currentColor" stroke-width="4">
+<line x1="50" x2="10" y1="50" y2="10"></line>
+<line x1="50" x2="5" y1="50" y2="30"></line>
+<line x1="50" x2="30" y1="50" y2="5"></line>
+<line x1="50" x2="50" y1="50" y2="2"></line>
+<line x1="50" x2="70" y1="50" y2="5"></line>
+<line x1="50" x2="90" y1="50" y2="15"></line>
+</g>
+</svg>
+</div>
+<!-- Gigantic Brand Headline -->
+<div class="flex items-center tracking-tighter w-full justify-between">
+<span class="text-[110px] sm:text-[180px] lg:text-[230px] font-black leading-none text-white tracking-tight inline-flex items-baseline drop-shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+<span class="inline-block transform -skew-x-12 mr-[-10px] text-yellow-400 drop-shadow-[0_0_35px_rgba(250,204,21,0.4)]">F</span>fitup
+          </span>
+<!-- Right Sunburst Motif in Footer -->
+<div class="hidden sm:block w-36 h-36 opacity-25 pointer-events-none">
+<svg class="w-full h-full text-slate-500" viewbox="0 0 100 100">
+<g stroke="currentColor" stroke-width="3">
+<line x1="50" x2="90" y1="50" y2="10"></line>
+<line x1="50" x2="95" y1="50" y2="30"></line>
+<line x1="50" x2="70" y1="50" y2="5"></line>
+<line x1="50" x2="50" y1="50" y2="2"></line>
+<line x1="50" x2="30" y1="50" y2="5"></line>
+<line x1="50" x2="10" y1="50" y2="15"></line>
+<line x1="50" x2="100" y1="50" y2="50"></line>
+<line x1="50" x2="95" y1="50" y2="70"></line>
+<line x1="50" x2="85" y1="50" y2="90"></line>
+</g>
+</svg>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</div>
+<!-- END: SiteWrapper -->
+</body></html>
