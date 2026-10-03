@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
 /* ───────────── Framer Motion Variant Definitions ───────────── */
@@ -77,6 +77,7 @@ export default function Home() {
   const [teamCategory, setTeamCategory] = useState<"all" | "directors" | "actors" | "production">("all");
   const [selectedMember, setSelectedMember] = useState<any | null>(null);
   const teamScrollRef = useRef<HTMLDivElement>(null);
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
 
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -266,7 +267,7 @@ export default function Home() {
       genre: "Original Drama",
       emoji: "🎭",
       description: "A gripping original drama exploring secrets, ambition, and redemption on our intimate stage. Directed by our resident ensemble with live chamber score and 120-seat acoustic perfection. This production pushes the boundaries of modern theatrical storytelling.",
-      imgSrc: "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?q=80&w=600&auto=format&fit=crop",
+      imgSrc: "https://i.pinimg.com/1200x/32/d2/33/32d23396e60a94b78db9fb03182cc2f0.jpg",
     },
     {
       id: 2,
@@ -298,7 +299,7 @@ export default function Home() {
       genre: "Historical Drama",
       emoji: "📜",
       description: "A moving historical drama that chronicles the final season of a legendary theater company in 1920s London. Based on true events, this production explores legacy, sacrifice, and the undying spirit of live performance.",
-      imgSrc: "https://images.unsplash.com/photo-1570882197471-d5d51f1f02a6?q=80&w=600&auto=format&fit=crop",
+      imgSrc: "https://i.pinimg.com/1200x/7c/ea/4b/7cea4b14f672b93ed2f86e206957e031.jpg",
     },
     {
       id: 6,
@@ -312,23 +313,49 @@ export default function Home() {
 
   const handleProductionNav = (direction: "up" | "down") => {
     setCurrentProduction((prev) => {
-      if (direction === "up") return prev === 0 ? productionCards.length - 1 : prev - 1;
-      return prev === productionCards.length - 1 ? 0 : prev + 1;
+      const total = productionCards.length;
+      if (direction === "up") return (prev - 1 + total) % total;
+      return (prev + 1) % total;
     });
   };
 
-  const handleCarouselWheel = (e: React.WheelEvent) => {
-    const now = Date.now();
-    if (now - lastScrollTime.current < 450) return;
-    if (Math.abs(e.deltaY) > 20) {
-      if (e.deltaY > 0) {
-        handleProductionNav("down");
-      } else {
-        handleProductionNav("up");
+  useEffect(() => {
+    const container = carouselContainerRef.current;
+    if (!container) return;
+
+    const onWheel = (e: WheelEvent) => {
+      // Intercept wheel scroll: prevent window/page scrolling while over carousel
+      e.preventDefault();
+      e.stopPropagation();
+
+      const now = Date.now();
+      if (now - lastScrollTime.current < 350) return;
+
+      if (Math.abs(e.deltaY) > 8) {
+        if (e.deltaY > 0) {
+          handleProductionNav("down");
+        } else {
+          handleProductionNav("up");
+        }
+        lastScrollTime.current = now;
       }
-      lastScrollTime.current = now;
-    }
-  };
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (touchStartY.current !== null) {
+        // Prevent default page scroll during carousel touch drag
+        e.preventDefault();
+      }
+    };
+
+    container.addEventListener("wheel", onWheel, { passive: false });
+    container.addEventListener("touchmove", onTouchMove, { passive: false });
+
+    return () => {
+      container.removeEventListener("wheel", onWheel);
+      container.removeEventListener("touchmove", onTouchMove);
+    };
+  }, [productionCards.length]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartY.current = e.touches[0].clientY;
@@ -337,7 +364,7 @@ export default function Home() {
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (touchStartY.current === null) return;
     const deltaY = touchStartY.current - e.changedTouches[0].clientY;
-    if (Math.abs(deltaY) > 35) {
+    if (Math.abs(deltaY) > 30) {
       if (deltaY > 0) {
         handleProductionNav("down");
       } else {
@@ -609,7 +636,7 @@ export default function Home() {
                 {/* Main Hero Stage Drama Card */}
                 <motion.div variants={scaleFade} className="relative w-full max-w-[440px] h-[540px] rounded-[55px] overflow-hidden glass-card p-2 shadow-2xl border border-white/20 shadow-amber-950/30">
                   <img
-                    src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=900&auto=format&fit=crop"
+                    src="https://i.pinimg.com/736x/aa/71/26/aa712695fbd969e1b23f31e16dd1645d.jpg"
                     alt="Intense stage actor under warm theater spotlight in dramatic performance"
                     className="w-full h-full object-cover rounded-[48px] brightness-95 contrast-110"
                   />
@@ -690,7 +717,7 @@ export default function Home() {
                 <div className="lg:col-span-5 relative flex justify-center">
                   <div className="relative w-full max-w-[340px] h-[340px] rounded-3xl overflow-hidden bg-white/[0.04] backdrop-blur-xl flex items-center justify-center border border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25)] shadow-2xl group">
                     <img
-                      src="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?q=80&w=900&auto=format&fit=crop"
+                      src="https://i.pinimg.com/1200x/28/f7/2c/28f72c6f10048035e0c9133d6126969d.jpg"
                       alt="Upcoming Stage Drama Production: Echoes of the Velvet Curtain"
                       className="w-full h-full object-cover object-center brightness-95 group-hover:scale-105 transition-transform duration-500"
                     />
@@ -974,13 +1001,13 @@ export default function Home() {
 
             {/* ── Left Column: Vertical Angled Card Stack ── */}
             <motion.div
+              ref={carouselContainerRef}
               variants={scaleFade}
               initial="hidden"
               whileInView="visible"
               viewport={replayViewportSmall}
-              className="lg:col-span-5 relative flex justify-center items-center select-none"
-              style={{ height: 660, perspective: '1200px' }}
-              onWheel={handleCarouselWheel}
+              className="lg:col-span-5 relative flex justify-center items-center select-none cursor-ns-resize"
+              style={{ height: 660, perspective: '1200px', touchAction: 'none' }}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
