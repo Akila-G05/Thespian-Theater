@@ -83,7 +83,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-/* Custom subtle animation */
+/* Custom subtle animations */
 @keyframes slowSpin {
   from {
     transform: rotate(0deg);
@@ -111,3 +111,97 @@ body {
 .animate-pulse-glow {
   animation: pulseGlow 2.5s ease-in-out infinite;
 }
+
+/* Golden Particle Swirl Orbit */
+@keyframes particleSwirl {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-15px) rotate(8deg);
+    opacity: 1;
+  }
+}
+
+.animate-particle-swirl {
+  animation: particleSwirl 24s linear infinite;
+}
+
+.animate-particle-float {
+  animation: particleFloat 6s ease-in-out infinite;
+}
+
+/* Horizontal Flowing Wave Lines */
+@keyframes waveFlowSlow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes waveFlowFast {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-wave-flow-slow {
+  animation: waveFlowSlow 35s linear infinite;
+}
+
+.animate-wave-flow-fast {
+  animation: waveFlowFast 25s linear infinite;
+}
+
+/* On-Air Glowing Ring for Ensemble Cards */
+@keyframes glowRingPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(250, 204, 21, 0.4), inset 0 0 10px rgba(250, 204, 21, 0.2);
+    border-color: rgba(250, 204, 21, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(250, 204, 21, 0.8), 0 0 15px rgba(245, 158, 11, 0.6), inset 0 0 20px rgba(250, 204, 21, 0.4);
+    border-color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.glow-ring-active {
+  animation: glowRingPulse 2s ease-in-out infinite;
+}
+
+/* Staggered Reveal Slide-In with Motion Blur */
+@keyframes revealSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.animate-stagger-reveal {
+  animation: revealSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

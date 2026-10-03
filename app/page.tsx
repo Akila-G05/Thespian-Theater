@@ -10,12 +10,189 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentProduction, setCurrentProduction] = useState(0);
 
+  const [teamCategory, setTeamCategory] = useState<"all" | "directors" | "actors" | "production">("all");
+  const [selectedMember, setSelectedMember] = useState<any | null>(null);
+  const teamScrollRef = useRef<HTMLDivElement>(null);
+
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  // Motion & Animation States
+  const [heroMousePos, setHeroMousePos] = useState({ x: 0, y: 0 });
+  const [tiltAngles, setTiltAngles] = useState<{ [key: string]: { rotateX: number; rotateY: number } }>({});
+  const [hoveredMemberId, setHoveredMemberId] = useState<string | null>(null);
+
+  const handleHeroMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setHeroMousePos({ x, y });
+  };
+
+  const handleEnsembleMouseMove = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = Number((((y - centerY) / centerY) * -14).toFixed(2));
+    const rotateY = Number((((x - centerX) / centerX) * 14).toFixed(2));
+    setTiltAngles((prev) => ({ ...prev, [id]: { rotateX, rotateY } }));
+    setHoveredMemberId(id);
+  };
+
+  const handleEnsembleMouseLeave = (id: string) => {
+    setTiltAngles((prev) => ({ ...prev, [id]: { rotateX: 0, rotateY: 0 } }));
+    setHoveredMemberId(null);
+  };
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.message) {
+      setFormSubmitted(true);
+      setTimeout(() => {
+        setFormData({ name: "", email: "", message: "" });
+        setFormSubmitted(false);
+      }, 4000);
+    }
+  };
+
   const lastScrollTime = useRef(0);
   const touchStartY = useRef<number | null>(null);
 
   const handleReserve = (eventTitle: string) => {
     setModalEvent(eventTitle);
     setReservedEvents((prev) => ({ ...prev, [eventTitle]: true }));
+  };
+
+  const FlowingWaveDivider = ({ flip = false }: { flip?: boolean }) => (
+    <div className={`w-full overflow-hidden leading-none relative z-20 pointer-events-none select-none py-1 ${flip ? "rotate-180" : ""}`}>
+      <div className="flex w-[200%] animate-wave-flow-slow opacity-75">
+        <svg className="w-1/2 h-14 text-amber-400/50 shrink-0" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path
+            d="M0,20 C180,90 380,-30 540,55 C700,135 920,10 1200,60 L1200,120 L0,120 Z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeDasharray="10 6"
+          />
+          <path
+            d="M0,50 C220,110 420,-10 620,70 C820,140 1020,30 1200,80"
+            fill="none"
+            stroke="rgba(255, 255, 255, 0.25)"
+            strokeWidth="1.8"
+          />
+        </svg>
+        <svg className="w-1/2 h-14 text-amber-400/50 shrink-0" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path
+            d="M0,20 C180,90 380,-30 540,55 C700,135 920,10 1200,60 L1200,120 L0,120 Z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeDasharray="10 6"
+          />
+          <path
+            d="M0,50 C220,110 420,-10 620,70 C820,140 1020,30 1200,80"
+            fill="none"
+            stroke="rgba(255, 255, 255, 0.25)"
+            strokeWidth="1.8"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+
+  const ensembleMembers = [
+    {
+      id: "maduranga",
+      name: "Mr. Maduranga Weerasingha",
+      role: "Artistic Director",
+      displayRole: "Artistic Director & Founder",
+      category: "directors",
+      imgSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+      bio: "Visionary director with 15+ years shaping raw drama into spellbinding stage experiences. Founder of Thespian Theater and champion of independent arts.",
+      facebook: "facebook.com/maduranga.weerasingha",
+      experience: "15+ Years",
+      plays: ["Echoes of the Velvet Curtain", "The Crimson Sonata"],
+      quote: "Theater isn't just performance; it is the living mirror of our shared humanity."
+    },
+    {
+      id: "amara",
+      name: "Amara Perera",
+      role: "Lead Actress",
+      displayRole: "Lead Dramatic Actress",
+      category: "actors",
+      imgSrc: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+      bio: "Award-winning performer known for immense emotional depth and captivating lead presence in classical tragedies and modern Sri Lankan drama.",
+      facebook: "facebook.com/amara.perera",
+      experience: "10 Years",
+      plays: ["Echoes of the Velvet Curtain", "A Midsummer Dream"],
+      quote: "Every character has a secret heartbeat — my job is to make the audience hear it."
+    },
+    {
+      id: "enrique",
+      name: "Enrique Abascal",
+      role: "Associate",
+      displayRole: "Associate Director",
+      category: "directors",
+      imgSrc: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop",
+      bio: "Renowned scenographer and associate director specializing in architectural stage lighting, dynamic pacing, and immersive staging.",
+      facebook: "facebook.com/enriqueabascal",
+      experience: "12 Years",
+      plays: ["Shadows of Tomorrow", "The Last Curtain Call"],
+      quote: "Space and shadow speak just as loudly as spoken script."
+    },
+    {
+      id: "kasun",
+      name: "Kasun Silva",
+      role: "Lead Actor",
+      displayRole: "Lead Ensemble Actor",
+      category: "actors",
+      imgSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop",
+      bio: "Versatile stage performer with a commanding voice and intense physicality across thrillers, period drama, and experimental works.",
+      facebook: "facebook.com/kasun.silva",
+      experience: "8 Years",
+      plays: ["Shadows of Tomorrow", "The Crimson Sonata"],
+      quote: "When the lights hit the stage, all pretense fades into truth."
+    },
+    {
+      id: "nimesha",
+      name: "Nimesha Fernando",
+      role: "Stage Manager",
+      displayRole: "Head Stage Manager",
+      category: "production",
+      imgSrc: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop",
+      bio: "The master coordinator behind every live show — executing light cues, set shifts, sound synchronization, and stage safety without a hitch.",
+      facebook: "facebook.com/nimesha-fernando",
+      experience: "9 Years",
+      plays: ["All Ensemble Productions"],
+      quote: "Perfection happens in the dark before the curtain rises."
+    },
+    {
+      id: "roshan",
+      name: "Roshan Jayasekara",
+      role: "Playwright",
+      displayRole: "Resident Playwright & Scenographer",
+      category: "directors",
+      imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop",
+      bio: "Acclaimed writer crafting original scripts that explore myth, memory, and modern morality. Recipient of national literary honors.",
+      facebook: "facebook.com/roshan-jayasekara",
+      experience: "14 Years",
+      plays: ["Echoes of the Velvet Curtain", "The Last Curtain Call"],
+      quote: "Words are the invisible architecture of live theater."
+    }
+  ];
+
+  const filteredEnsemble = ensembleMembers.filter((m) => {
+    if (teamCategory === "all") return true;
+    return m.category === teamCategory;
+  });
+
+  const scrollTeam = (direction: "left" | "right") => {
+    if (teamScrollRef.current) {
+      const scrollAmount = direction === "left" ? -330 : 330;
+      teamScrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
   };
 
   const productionCards = [
@@ -112,6 +289,7 @@ export default function Home() {
       title: "Echoes of the Velvet Curtain",
       line1: "Echoes of the",
       line2: "Velvet Curtain",
+      type: "Original Drama",
       date: "Oct 24 – Nov 12, 2025",
       location: "(Thespian Hall, Main Stage)",
     },
@@ -120,6 +298,7 @@ export default function Home() {
       title: "Shadows of Tomorrow",
       line1: "Shadows of",
       line2: "Tomorrow",
+      type: "Psychological Thriller",
       date: "Nov 21 – Dec 07, 2025",
       location: "(Thespian Hall, Main Stage)",
     },
@@ -128,6 +307,7 @@ export default function Home() {
       title: "The Crimson Sonata",
       line1: "The Crimson",
       line2: "Sonata",
+      type: "Romantic Tragedy",
       date: "Dec 19 – Jan 04, 2026",
       location: "(Thespian Hall, Studio Theater)",
     },
@@ -136,8 +316,18 @@ export default function Home() {
       title: "A Midsummer Dream",
       line1: "A Midsummer",
       line2: "Dream",
+      type: "Shakespeare Adaptation",
       date: "Jan 16 – Feb 01, 2026",
       location: "(Thespian Hall, Main Stage)",
+    },
+    {
+      id: "05",
+      title: "Acting & Stagecraft Workshop",
+      line1: "Acting & Stagecraft",
+      line2: "Intensive",
+      type: "Theatrical Workshop",
+      date: "Feb 15 – Feb 18, 2026",
+      location: "(Repertory Rehearsal Studio)",
     },
   ];
 
@@ -148,7 +338,7 @@ export default function Home() {
           SECTION 1 & 2: HEADER, HERO & THESPIAN THEATER
           Background: bg-section-hero (--bg-hero: #0f131c)
          ========================================================= */}
-      <section className="w-full bg-section-hero relative transition-colors overflow-hidden">
+      <section onMouseMove={handleHeroMouseMove} className="w-full bg-section-hero relative transition-colors overflow-hidden">
         {/* Ambient Theatrical Spotlight Glows */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-b from-amber-500/15 via-yellow-600/5 to-transparent rounded-full blur-3xl pointer-events-none -z-0"></div>
         <div className="absolute top-[700px] left-[-200px] w-[600px] h-[600px] bg-gradient-to-r from-red-900/15 via-amber-600/10 to-transparent rounded-full blur-3xl pointer-events-none -z-0"></div>
@@ -348,23 +538,6 @@ export default function Home() {
                   {/* Stage Lighting Overlay Gradients */}
                   <div className="absolute inset-0 rounded-[48px] bg-gradient-to-t from-black/80 via-transparent to-amber-500/10 pointer-events-none" />
 
-                  {/* Dramatic stage spotlight tracker ring */}
-                  <div className="absolute bottom-[28%] right-[28%] flex items-center pointer-events-none">
-                    <span className="relative flex h-3.5 w-3.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white border-2 border-amber-400 shadow-sm"></span>
-                    </span>
-                    <div className="w-16 h-[1.5px] bg-amber-300/80 ml-1"></div>
-                  </div>
-                  <div className="absolute top-[35%] left-[28%] flex items-center pointer-events-none">
-                    <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white border-2 border-amber-400 shadow-sm"></span>
-                  </div>
-
-                  {/* Stage Live Tag */}
-                  <div className="absolute bottom-6 left-8 bg-slate-950/80 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span className="text-[10px] font-bold tracking-wider text-slate-200 uppercase">Season 2026 • On Stage</span>
-                  </div>
                 </div>
 
                 {/* Glassmorphism Floating Badge 1: Performance Schedule & Occupancy */}
@@ -533,6 +706,7 @@ export default function Home() {
           </div>
 
         </div>
+
       </section>
 
       {/* =========================================================
@@ -648,38 +822,38 @@ export default function Home() {
           Background: bg-section-yoga (--bg-yoga: #0f131c)
          ========================================================= */}
 
-         {/* Top Ticker / Marquee Banner */}
-        <div className="py-6 border-b border-slate-800/80 overflow-hidden bg-slate-950/30">
-          <div className="flex items-center justify-around whitespace-nowrap text-3xl sm:text-4xl font-extrabold text-white tracking-tight select-none">
-            <span className="opacity-40">SHOWTIMES</span>
+      {/* Top Ticker / Marquee Banner */}
+      <div className="py-6 border-b border-slate-800/80 overflow-hidden bg-slate-950/30">
+        <div className="flex items-center justify-around whitespace-nowrap text-3xl sm:text-4xl font-extrabold text-white tracking-tight select-none">
+          <span className="opacity-40">SHOWTIMES</span>
 
-            <div className="w-8 h-8 opacity-60">
-              <svg className="w-full h-full text-amber-400 animate-slow-spin" viewBox="0 0 100 100">
-                <g stroke="currentColor" strokeLinecap="round" strokeWidth="3">
-                  <line x1="50" x2="50" y1="5" y2="25" /><line x1="50" x2="50" y1="75" y2="95" />
-                  <line x1="5" x2="25" y1="50" y2="50" /><line x1="75" x2="95" y1="50" y2="50" />
-                  <line x1="18" x2="32" y1="18" y2="32" /><line x1="68" x2="82" y1="68" y2="82" />
-                  <line x1="18" x2="32" y1="82" y2="68" /><line x1="68" x2="82" y1="32" y2="18" />
-                </g>
-              </svg>
-            </div>
-
-            <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">2026</span>
-
-            <div className="w-8 h-8 opacity-60">
-              <svg className="w-full h-full text-amber-400 animate-slow-spin" viewBox="0 0 100 100">
-                <g stroke="currentColor" strokeLinecap="round" strokeWidth="3">
-                  <line x1="50" x2="50" y1="5" y2="25" /><line x1="50" x2="50" y1="75" y2="95" />
-                  <line x1="5" x2="25" y1="50" y2="50" /><line x1="75" x2="95" y1="50" y2="50" />
-                  <line x1="18" x2="32" y1="18" y2="32" /><line x1="68" x2="82" y1="68" y2="82" />
-                  <line x1="18" x2="32" y1="82" y2="68" /><line x1="68" x2="82" y1="32" y2="18" />
-                </g>
-              </svg>
-            </div>
-
-            <span className="opacity-40">THESPIANS</span>
+          <div className="w-8 h-8 opacity-60">
+            <svg className="w-full h-full text-amber-400 animate-slow-spin" viewBox="0 0 100 100">
+              <g stroke="currentColor" strokeLinecap="round" strokeWidth="3">
+                <line x1="50" x2="50" y1="5" y2="25" /><line x1="50" x2="50" y1="75" y2="95" />
+                <line x1="5" x2="25" y1="50" y2="50" /><line x1="75" x2="95" y1="50" y2="50" />
+                <line x1="18" x2="32" y1="18" y2="32" /><line x1="68" x2="82" y1="68" y2="82" />
+                <line x1="18" x2="32" y1="82" y2="68" /><line x1="68" x2="82" y1="32" y2="18" />
+              </g>
+            </svg>
           </div>
+
+          <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">Of</span>
+
+          <div className="w-8 h-8 opacity-60">
+            <svg className="w-full h-full text-amber-400 animate-slow-spin" viewBox="0 0 100 100">
+              <g stroke="currentColor" strokeLinecap="round" strokeWidth="3">
+                <line x1="50" x2="50" y1="5" y2="25" /><line x1="50" x2="50" y1="75" y2="95" />
+                <line x1="5" x2="25" y1="50" y2="50" /><line x1="75" x2="95" y1="50" y2="50" />
+                <line x1="18" x2="32" y1="18" y2="32" /><line x1="68" x2="82" y1="68" y2="82" />
+                <line x1="18" x2="32" y1="82" y2="68" /><line x1="68" x2="82" y1="32" y2="18" />
+              </g>
+            </svg>
+          </div>
+
+          <span className="opacity-40">THESPIANS</span>
         </div>
+      </div>
       <section id="start" className="w-full bg-section-yoga py-8 relative z-10 transition-colors overflow-hidden">
         {/* Ambient background glows */}
         <div className="absolute top-1/3 left-[-150px] w-[500px] h-[500px] bg-gradient-to-r from-amber-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -737,12 +911,12 @@ export default function Home() {
                   } else if (isTop) {
                     cardTransform = 'translateY(-245px) rotate(-22deg) scale(0.78)';
                     cardOpacity = 0.45;
-                    cardFilter = 'blur(5px)';
+                    cardFilter = 'blur(3px)';
                     cardZ = 10;
                   } else if (isBottom) {
                     cardTransform = 'translateY(245px) rotate(22deg) scale(0.78)';
                     cardOpacity = 0.45;
-                    cardFilter = 'blur(5px)';
+                    cardFilter = 'blur(3px)';
                     cardZ = 10;
                   } else if (offset < 0) {
                     cardTransform = 'translateY(-420px) rotate(-35deg) scale(0.55)';
@@ -892,21 +1066,23 @@ export default function Home() {
 
           </div>
         </div>
+
+        <FlowingWaveDivider flip />
       </section>
 
       {/* =========================================================
           SECTION 5: OUR TEAM / ENSEMBLE
           Background: bg-section-yoga (--bg-yoga: #0f131c)
          ========================================================= */}
-      <section id="team" className="w-full bg-section-yoga py-20 relative z-10 transition-colors overflow-hidden border-t border-slate-800/80">
+      <section id="team" className="w-full bg-section-meals py-24 relative z-10 transition-colors overflow-hidden border-t border-b border-slate-800/80">
         {/* Ambient glow */}
         <div className="absolute top-0 right-[-100px] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-[-100px] w-[400px] h-[400px] bg-red-900/8 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
 
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
@@ -917,115 +1093,127 @@ export default function Home() {
                 <span className="text-yellow-400 font-semibold drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">Ensemble</span>
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-slate-400 font-medium max-w-sm leading-relaxed">
-              A dedicated group of actors, directors, and stagecraft artists united by a love of authentic storytelling and live performance.
-            </p>
+
+            <div className="max-w-lg">
+              <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed mb-4">
+                Meet the vibrant core of Thespian Theater — a collective of actors, directors, and storytellers bound by a shared passion for the stage. Each member brings unique energy, depth, and artistic vision, making our ensemble a dynamic force in the local theatre scene. Together, we create magic that resonates long after the curtain falls.
+              </p>
+            </div>
           </div>
 
-          {/* Team Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Carousel Category Tabs & Arrow Controls */}
 
-            {/* Card: Artistic Director */}
-            <div className="glass-card rounded-3xl overflow-hidden group hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-400/10 transition-all duration-300 cursor-pointer relative">
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop"
-                  alt="Mr. Maduranga Weerasingha — Artistic Director"
-                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500 brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black tracking-wider uppercase shadow-lg">
-                    ⭐ Director
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <div className="font-signature text-xl text-amber-300 leading-tight mb-0.5">Mr. Maduranga Weerasingha</div>
-                <div className="text-[10px] text-amber-400/80 font-bold tracking-wider uppercase mb-3">Artistic Director & Founder</div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">Visionary director with 15+ years shaping raw drama into spellbinding stage experiences.</p>
-              </div>
-            </div>
 
-            {/* Card: Lead Actress */}
-            <div className="glass-card rounded-3xl overflow-hidden group hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-400/10 transition-all duration-300 cursor-pointer relative">
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop"
-                  alt="Amara Perera — Lead Actress"
-                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500 brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-sm text-[9px] font-bold tracking-wider uppercase">
-                    🎭 Actress
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <div className="text-base font-extrabold text-white leading-tight mb-0.5">Amara Perera</div>
-                <div className="text-[10px] text-amber-400/80 font-bold tracking-wider uppercase mb-3">Lead Actress</div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">Award-winning performer known for powerful emotional range in tragic and classical roles.</p>
-              </div>
-            </div>
-
-            {/* Card: Lead Actor */}
-            <div className="glass-card rounded-3xl overflow-hidden group hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-400/10 transition-all duration-300 cursor-pointer relative">
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop"
-                  alt="Kasun Silva — Lead Actor"
-                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500 brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-sm text-[9px] font-bold tracking-wider uppercase">
-                    🎭 Actor
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <div className="text-base font-extrabold text-white leading-tight mb-0.5">Kasun Silva</div>
-                <div className="text-[10px] text-amber-400/80 font-bold tracking-wider uppercase mb-3">Lead Actor</div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">Versatile performer with a commanding stage presence across drama, thriller, and comedy.</p>
-              </div>
-            </div>
-
-            {/* Card: Stage Manager */}
-            <div className="glass-card rounded-3xl overflow-hidden group hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-400/10 transition-all duration-300 cursor-pointer relative">
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop"
-                  alt="Nimesha Fernando — Stage Manager"
-                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500 brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-sm text-[9px] font-bold tracking-wider uppercase">
-                    🎬 Stage
-                  </span>
-                </div>
-              </div>
-              <div className="p-5">
-                <div className="text-base font-extrabold text-white leading-tight mb-0.5">Nimesha Fernando</div>
-                <div className="text-[10px] text-amber-400/80 font-bold tracking-wider uppercase mb-3">Stage Manager</div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">The backbone of every production — coordinating lighting, props, and live cues flawlessly.</p>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Bottom CTA */}
-          <div className="flex justify-center mt-12">
-            <a
-              href="#events"
-              className="px-8 py-3 rounded-full border border-amber-400/40 bg-amber-400/10 text-xs font-bold tracking-wider text-amber-300 hover:bg-amber-400 hover:text-slate-950 hover:border-amber-400 transition-all duration-300 inline-flex items-center gap-2 shadow-lg shadow-amber-400/10"
+          {/* Carousel Wrapper with Side Floating Navigation Arrows */}
+          <div className="relative group/carousel my-4">
+            
+            {/* Left Floating Side Arrow Button */}
+            <button
+              onClick={() => scrollTeam("left")}
+              aria-label="Previous Ensemble Members"
+              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/95 border border-slate-700/90 text-white hover:text-yellow-400 hover:bg-slate-800 hover:border-amber-400/60 hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-2xl backdrop-blur-md cursor-pointer active:scale-95"
             >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                <path d="M20 10V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v5c1.1 0 2 .9 2 2s-.9 2-2 2v5c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-5c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-4.5V8c-1.66 0-3 1.34-3 3s1.34 3 3 3v2.5H6V14c1.66 0 3-1.34 3-3s-1.34-3-3-3V5.5h12z" />
+              <svg className="w-6 h-6 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
-              VIEW UPCOMING SHOWS
-            </a>
+            </button>
+
+            {/* Right Floating Side Arrow Button */}
+            <button
+              onClick={() => scrollTeam("right")}
+              aria-label="Next Ensemble Members"
+              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/95 border border-slate-700/90 text-white hover:text-yellow-400 hover:bg-slate-800 hover:border-amber-400/60 hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-2xl backdrop-blur-md cursor-pointer active:scale-95"
+            >
+              <svg className="w-6 h-6 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Horizontal Column Carousel Row */}
+            <div
+              ref={teamScrollRef}
+              className="flex gap-4 overflow-x-auto scrollbar-none snap-x snap-mandatory py-4 px-1 -mx-1 relative z-10"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {filteredEnsemble.map((member) => {
+                const tilt = tiltAngles[member.id] || { rotateX: 0, rotateY: 0 };
+                const isHovered = hoveredMemberId === member.id;
+
+                return (
+                  <div
+                    key={member.id}
+                    onMouseMove={(e) => handleEnsembleMouseMove(e, member.id)}
+                    onMouseLeave={() => handleEnsembleMouseLeave(member.id)}
+                    onClick={() => setSelectedMember(member)}
+                    style={{
+                      transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) ${isHovered ? 'scale(1.03)' : 'scale(1)'}`,
+                      transformStyle: 'preserve-3d',
+                      transition: isHovered ? 'transform 0.15s ease-out' : 'transform 0.5s ease-out'
+                    }}
+                    className="group flex-none w-[260px] sm:w-[280px] md:w-[300px] h-[480px] bg-[#131927]/90 rounded-2xl overflow-hidden relative border border-slate-800/90 shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 hover:bg-[#1a2336] hover:border-amber-400/40 transition-all duration-500 cursor-pointer flex flex-col justify-between snap-start"
+                  >
+                    {/* Top Text Info: Role & Name */}
+                    <div className="p-6 pt-7 z-10">
+                      <span className="block text-[11px] font-bold text-amber-400/90 tracking-wider uppercase mb-1">
+                        {member.role}
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-black text-white leading-tight tracking-tight group-hover:text-yellow-300 transition-colors">
+                        {member.name}
+                      </h3>
+                    </div>
+
+                    {/* Cutout Portrait Image */}
+                    <div className="relative w-full h-[340px] mt-auto overflow-hidden flex items-end justify-center">
+                      <img
+                        src={member.imgSrc}
+                        alt={member.name}
+                        className={`w-full h-full object-cover object-top filter transition-all duration-700 ease-out ${
+                          isHovered ? 'grayscale-0 contrast-105 brightness-105 scale-105' : 'grayscale contrast-125 brightness-90'
+                        }`}
+                      />
+
+                      {/* Static Ensemble Pill Badge (Top Left of Card Image) */}
+                      <div className="absolute top-3 left-3 z-20">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950/80 text-amber-400/90 border border-slate-800 text-[9px] font-black tracking-wider uppercase backdrop-blur-md">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                          ENSEMBLE
+                        </span>
+                      </div>
+
+                      {/* Gradient Overlay at bottom for dark dramatic depth */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d131f] via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity" />
+
+                      {/* Facebook Profile Pill Badge (Bottom Left with Facebook Icon) */}
+                      <div className="absolute bottom-4 left-4 z-20">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/90 border border-slate-800 text-slate-300 text-[10px] font-medium backdrop-blur-md shadow-lg group-hover:border-amber-400/50 group-hover:text-amber-300 group-hover:scale-105 transition-all">
+                          <svg className="w-3.5 h-3.5 fill-current text-[#1877F2]" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                          </svg>
+                          {member.facebook}
+                        </span>
+                      </div>
+
+                      {/* View Details Hover Tag */}
+                      <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="px-2.5 py-1 rounded-full bg-yellow-400 text-slate-950 text-[10px] font-black tracking-wider uppercase shadow-md shadow-yellow-400/20">
+                          VIEW BIO
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Bottom CTA Button (Using Brand Default Yellow Button Design) */}
+          <div className="flex justify-center mt-12">
+            <button className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-bold text-xs tracking-widest uppercase shadow-lg shadow-amber-400/20 hover:brightness-110 transition-all cursor-pointer active:scale-95 inline-flex items-center gap-2">
+              Explore More
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </button>
           </div>
 
         </div>
@@ -1035,14 +1223,28 @@ export default function Home() {
           SECTION 6: SHOWTIMES TICKER & EVENTS
           Background: bg-section-events (--bg-events: #181f2e)
          ========================================================= */}
-      <section id="events" className="w-full bg-section-events relative z-10 border-t border-slate-800/80 transition-colors">
+      <section id="events" className="w-full bg-section-yoga py-20 relative z-10 border-t border-slate-800/80 transition-colors">
+
+        {/* Centered Yellow Badge & Centered Section Header */}
+        <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 text-center mb-10 relative z-10">
+          <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-4 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            ★ UPCOMING SCHEDULE & EVENTS
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+            Upcoming <span className="text-yellow-400 font-semibold drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">Showtimes & Events</span>
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-300 font-medium max-w-xl mx-auto leading-relaxed">
+            Explore our upcoming repertory plays, psychological thrillers, classical adaptations, and hands-on stagecraft workshops.
+          </p>
+        </div>
 
         {/* Top Ticker / Marquee Banner */}
-        <div className="py-6 border-b border-slate-800/80 overflow-hidden bg-slate-950/30">
-          <div className="flex items-center justify-around whitespace-nowrap text-3xl sm:text-4xl font-extrabold text-white tracking-tight select-none">
+        <div className="py-5 border-y border-slate-800/80 overflow-hidden bg-slate-950/30 mb-8">
+          <div className="flex items-center justify-around whitespace-nowrap text-2xl sm:text-3xl font-extrabold text-white tracking-tight select-none opacity-80">
             <span className="opacity-40">SHOWTIMES</span>
 
-            <div className="w-8 h-8 opacity-60">
+            <div className="w-6 h-6 opacity-60">
               <svg className="w-full h-full text-amber-400 animate-slow-spin" viewBox="0 0 100 100">
                 <g stroke="currentColor" strokeLinecap="round" strokeWidth="3">
                   <line x1="50" x2="50" y1="5" y2="25" /><line x1="50" x2="50" y1="75" y2="95" />
@@ -1053,9 +1255,9 @@ export default function Home() {
               </svg>
             </div>
 
-            <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">2026</span>
+            <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">THESPIAN REPERTORY</span>
 
-            <div className="w-8 h-8 opacity-60">
+            <div className="w-6 h-6 opacity-60">
               <svg className="w-full h-full text-amber-400 animate-slow-spin" viewBox="0 0 100 100">
                 <g stroke="currentColor" strokeLinecap="round" strokeWidth="3">
                   <line x1="50" x2="50" y1="5" y2="25" /><line x1="50" x2="50" y1="75" y2="95" />
@@ -1066,38 +1268,53 @@ export default function Home() {
               </svg>
             </div>
 
-            <span className="opacity-40">THESPIANS</span>
+            <span className="opacity-40">SEASON 2026</span>
           </div>
         </div>
 
-        {/* Event Schedule Rows */}
-        <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 py-12 divide-y divide-slate-800">
-          {events.map((evt) => (
+        {/* Event Schedule Rows with Motion Trail & Staggered Reveal */}
+        <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 divide-y divide-slate-800/80">
+          {events.map((evt, idx) => (
             <div
               key={evt.id}
-              className="py-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-slate-900/40 px-4 sm:px-6 rounded-2xl transition duration-200"
+              style={{ animationDelay: `${idx * 140}ms` }}
+              className="animate-stagger-reveal py-7 flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:bg-slate-900/50 px-4 sm:px-6 rounded-2xl transition-all duration-300 border border-transparent hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-500/5 group"
             >
-              <div className="flex items-baseline gap-8">
-                <span className="text-xs font-bold text-slate-500">{evt.id}</span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                  {evt.line1}<br />{evt.line2}
+              {/* Event ID & Title */}
+              <div className="flex items-baseline gap-6 lg:w-5/12">
+                <span className="text-sm font-bold text-amber-400/80 group-hover:text-amber-300 transition-colors">{evt.id}</span>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight group-hover:text-yellow-300 transition-colors">
+                  {evt.line1} {evt.line2}
                 </h3>
               </div>
 
-              <div className="text-xs font-medium text-slate-400 md:text-center">
-                {evt.date}<br />
-                <span className="text-slate-500 font-medium">{evt.location}</span>
+              {/* NEW COLUMN: Event Type (Drama, Workshop, Thriller, etc.) */}
+              <div className="lg:w-3/12">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-bold tracking-wide group-hover:border-amber-400/60 transition-colors">
+                  🎭 {evt.type}
+                </span>
               </div>
 
-              <div>
+              {/* Date & Location */}
+              <div className="text-xs font-medium text-slate-300 lg:w-3/12">
+                <span className="text-white font-bold block mb-0.5">{evt.date}</span>
+                <span className="text-slate-400">{evt.location}</span>
+              </div>
+
+              {/* More Details Button */}
+              <div className="lg:w-2/12 flex lg:justify-end">
                 <button
                   onClick={() => handleReserve(evt.title)}
-                  className={`px-6 py-2.5 rounded-full border text-xs font-bold transition-all whitespace-nowrap cursor-pointer active:scale-95 shadow-xs ${reservedEvents[evt.title]
-                    ? "bg-yellow-400 text-slate-950 border-yellow-400"
-                    : "border-slate-700 bg-slate-900/60 text-slate-200 hover:border-yellow-400 hover:text-yellow-400 hover:bg-slate-800"
-                    }`}
+                  className={`px-6 py-2.5 rounded-full border text-xs font-bold transition-all whitespace-nowrap cursor-pointer active:scale-95 shadow-md flex items-center gap-1.5 ${
+                    reservedEvents[evt.title]
+                      ? "bg-amber-400 text-slate-950 border-amber-400 font-extrabold shadow-amber-400/20"
+                      : "border-slate-700 bg-slate-900/80 text-slate-200 hover:border-yellow-400 hover:text-yellow-400 hover:bg-slate-800"
+                  }`}
                 >
-                  {reservedEvents[evt.title] ? "Spot Reserved ✓" : "Reserve Your Spot"}
+                  {reservedEvents[evt.title] ? "Spot Reserved ✓" : "More Details"}
+                  <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -1107,10 +1324,190 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-          SECTION 6: FOOTER
+          SECTION 7: CONTACT US FORM
+          Background: bg-section-meals (--bg-meals: #181f2e)
+         ========================================================= */}
+      <section id="contact" className="w-full bg-section-meals py-24 relative z-10 overflow-hidden border-t border-slate-800/80 transition-colors">
+        {/* Ambient Glows */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+          
+          {/* Main Card Canvas Frame */}
+          <div className="w-full bg-slate-900/60 backdrop-blur-xl rounded-[36px] sm:rounded-[48px] border border-slate-800/80 shadow-2xl p-6 sm:p-12 lg:p-16 relative overflow-hidden">
+            
+            {/* Top Left Symbol (Matching reference picture icon mark) */}
+            <div className="absolute top-8 left-8 hidden sm:block">
+              <span className="w-6 h-6 rounded-full border-2 border-amber-400 border-t-transparent animate-spin inline-block" />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              
+              {/* Left Column: Contact Form */}
+              <div className="lg:col-span-7">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  Reach Out To The Box Office
+                </div>
+
+                <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+                  Contact <span className="text-yellow-400 font-semibold drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">us</span>
+                </h2>
+
+                <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed mb-8 max-w-lg">
+                  Please don&apos;t hesitate to reach out to us whenever you need assistance with ticket reservations, private theater bookings, auditions, or press inquiries. We&apos;ll make sure to respond to you promptly.
+                </p>
+
+                {formSubmitted ? (
+                  <div className="p-6 rounded-2xl bg-amber-400/10 border border-amber-400/30 text-amber-300 text-sm font-bold flex items-center gap-3 animate-fadeIn">
+                    <span className="w-8 h-8 rounded-full bg-yellow-400 text-slate-950 flex items-center justify-center font-black">✓</span>
+                    Thank you! Your message has been sent to our Box Office. We will get back to you promptly.
+                  </div>
+                ) : (
+                  <form onSubmit={handleContactSubmit} className="space-y-6">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Your Full Name"
+                        className="w-full bg-slate-950/60 border-b-2 border-slate-700 focus:border-yellow-400 text-white px-4 py-3.5 text-sm focus:outline-none transition-colors rounded-t-lg font-medium"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="your.email@example.com"
+                        className="w-full bg-slate-950/60 border-b-2 border-slate-700 focus:border-yellow-400 text-white px-4 py-3.5 text-sm focus:outline-none transition-colors rounded-t-lg font-medium"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                        Message
+                      </label>
+                      <textarea
+                        required
+                        rows={3}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        placeholder="How can we assist you with tickets or productions?"
+                        className="w-full bg-slate-950/60 border-b-2 border-slate-700 focus:border-yellow-400 text-white px-4 py-3.5 text-sm focus:outline-none transition-colors rounded-t-lg resize-none font-medium"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full py-4 rounded-2xl bg-slate-950 border border-slate-800 text-white font-extrabold text-xs tracking-widest uppercase hover:bg-yellow-400 hover:text-slate-950 hover:border-yellow-400 transition-all duration-300 cursor-pointer shadow-lg active:scale-98"
+                    >
+                      Message
+                    </button>
+                  </form>
+                )}
+              </div>
+
+              {/* Right Column: Info Card with Gold Backdrop Block (Matching reference picture design) */}
+              <div className="lg:col-span-5 relative">
+                {/* Yellow/Amber Decorative Top-Right Corner Block & Bottom Dot (Matching reference layout) */}
+                <div className="absolute -top-6 -right-6 w-3/4 h-full bg-yellow-400 rounded-3xl -z-10 transform translate-x-3 translate-y-3 hidden sm:block shadow-lg" />
+                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-yellow-400 rounded-full -z-10 hidden sm:block shadow-md" />
+
+                {/* Dark Info Box */}
+                <div className="bg-[#0f1420] border border-slate-800/90 p-8 sm:p-10 rounded-[32px] shadow-2xl text-white relative">
+                  <h3 className="text-3xl font-extrabold text-white mb-8 tracking-tight">
+                    Info
+                  </h3>
+
+                  <div className="space-y-6">
+                    {/* Email */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                        <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase font-bold text-amber-400 tracking-wider block">BOX OFFICE EMAIL</span>
+                        <a href="mailto:info@thespiantheater.com" className="text-sm font-semibold text-slate-200 hover:text-yellow-400 transition-colors">
+                          info@thespiantheater.com
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                        <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase font-bold text-amber-400 tracking-wider block">TICKET HOTLINE</span>
+                        <a href="tel:+94112345678" className="text-sm font-semibold text-slate-200 hover:text-yellow-400 transition-colors">
+                          +94 11 234 5678 / +94 77 123 4567
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Address */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                        <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase font-bold text-amber-400 tracking-wider block">THEATER ADDRESS</span>
+                        <span className="text-sm font-semibold text-slate-200">
+                          27 Velvet Stage Street, Colombo 07
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Hours */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                        <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="9" />
+                          <path strokeLinecap="round" fill="none" d="M12 7v5l3 3" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span className="text-[10px] uppercase font-bold text-amber-400 tracking-wider block">BOX OFFICE HOURS</span>
+                        <span className="text-sm font-semibold text-slate-200">
+                          09:00 - 20:00 (Mon - Sun)
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================
+          SECTION 8: FOOTER
           Background: bg-section-footer (--bg-footer: #0f131c)
          ========================================================= */}
-      <footer id="contact" className="w-full bg-section-footer relative z-10 overflow-hidden border-t border-slate-800/80 transition-colors">
+      <footer className="w-full bg-section-footer relative z-10 overflow-hidden border-t border-slate-800/80 transition-colors">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 pt-16 pb-12">
 
           {/* Top Copyright */}
@@ -1188,6 +1585,82 @@ export default function Home() {
             >
               Great, thank you!
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Team Member Bio Modal */}
+      {selectedMember && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-fadeIn">
+          <div className="glass-card bg-slate-900/95 rounded-3xl overflow-hidden max-w-2xl w-full shadow-2xl border border-slate-700/80 flex flex-col md:flex-row relative">
+            <button
+              onClick={() => setSelectedMember(null)}
+              aria-label="Close modal"
+              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {/* Left Portrait */}
+            <div className="w-full md:w-2/5 h-64 md:h-auto relative overflow-hidden bg-slate-950">
+              <img
+                src={selectedMember.imgSrc}
+                alt={selectedMember.name}
+                className="w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-slate-950/80" />
+            </div>
+
+            {/* Right Details */}
+            <div className="w-full md:w-3/5 p-6 sm:p-8 flex flex-col justify-between">
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold uppercase tracking-wider mb-3">
+                  {selectedMember.displayRole}
+                </span>
+                <h3 className="text-2xl font-extrabold text-white mb-2 leading-tight">
+                  {selectedMember.name}
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                  {selectedMember.bio}
+                </p>
+
+                <div className="bg-slate-800/50 rounded-2xl p-4 mb-4 border border-slate-700/50">
+                  <div className="text-[10px] uppercase tracking-wider font-bold text-amber-400 mb-1">
+                    Featured Productions
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedMember.plays.map((play: string, i: number) => (
+                      <span key={i} className="text-xs bg-slate-900 px-2.5 py-1 rounded-lg text-slate-200 font-medium">
+                        🎭 {play}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {selectedMember.quote && (
+                  <blockquote className="text-xs italic text-slate-400 border-l-2 border-amber-400 pl-3 py-1 mb-4">
+                    &ldquo;{selectedMember.quote}&rdquo;
+                  </blockquote>
+                )}
+              </div>
+
+              <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+                <span className="text-[11px] text-slate-400 font-semibold">
+                  Experience: <strong className="text-white">{selectedMember.experience}</strong>
+                </span>
+                <a
+                  href={`https://${selectedMember.facebook}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-full bg-amber-400 text-slate-950 text-xs font-bold hover:bg-yellow-300 transition-colors inline-flex items-center gap-1.5"
+                >
+                  <svg className="w-3.5 h-3.5 fill-current text-[#1877F2]" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  Facebook Profile
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       )}
