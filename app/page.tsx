@@ -429,7 +429,7 @@ export default function Home() {
           SECTION 1 & 2: HEADER, HERO & THESPIAN THEATER
           Background: bg-section-hero (--bg-hero: #0f131c)
          ========================================================= */}
-      <section onMouseMove={handleHeroMouseMove} className="w-full bg-section-hero relative transition-colors overflow-hidden">
+      <section onMouseMove={handleHeroMouseMove} className="w-full bg-section-hero relative transition-colors overflow-hidden pt-3">
         {/* Ambient Theatrical Spotlight Glows */}
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-b from-amber-500/15 via-yellow-600/5 to-transparent rounded-full blur-3xl pointer-events-none -z-0"></div>
         <div className="absolute top-[700px] left-[-200px] w-[600px] h-[600px] bg-gradient-to-r from-red-900/15 via-amber-600/10 to-transparent rounded-full blur-3xl pointer-events-none -z-0"></div>
@@ -498,12 +498,12 @@ export default function Home() {
 
           {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
-            <div className="md:hidden mb-6 p-4 rounded-2xl glass-card flex flex-col gap-3 text-xs font-bold tracking-widest text-slate-200 uppercase border border-slate-700">
-              <a onClick={() => setMobileMenuOpen(false)} href="#how-it-works" className="py-1 hover:text-amber-400">WHY OUR THEATER</a>
-              <a onClick={() => setMobileMenuOpen(false)} href="#about" className="py-1 hover:text-amber-400">ABOUT ENSEMBLE</a>
-              <a onClick={() => setMobileMenuOpen(false)} href="#start" className="py-1 hover:text-amber-400">PRODUCTIONS</a>
-              <a onClick={() => setMobileMenuOpen(false)} href="#team" className="py-1 hover:text-amber-400">OUR TEAM</a>
-              <a onClick={() => setMobileMenuOpen(false)} href="#events" className="py-1 hover:text-amber-400">SHOWTIMES</a>
+            <div className="md:hidden mb-6 p-6 rounded-2xl glass-card flex flex-col items-center text-center gap-4 text-xs font-bold tracking-widest text-slate-200 uppercase border border-slate-700 backdrop-blur-2xl bg-slate-900/95 shadow-2xl">
+              <a onClick={() => setMobileMenuOpen(false)} href="#how-it-works" className="py-1.5 hover:text-amber-400 transition-colors">WHY OUR THEATER</a>
+              <a onClick={() => setMobileMenuOpen(false)} href="#about" className="py-1.5 hover:text-amber-400 transition-colors">ABOUT ENSEMBLE</a>
+              <a onClick={() => setMobileMenuOpen(false)} href="#start" className="py-1.5 hover:text-amber-400 transition-colors">PRODUCTIONS</a>
+              <a onClick={() => setMobileMenuOpen(false)} href="#team" className="py-1.5 hover:text-amber-400 transition-colors">OUR TEAM</a>
+              <a onClick={() => setMobileMenuOpen(false)} href="#events" className="py-1.5 hover:text-amber-400 transition-colors">SHOWTIMES</a>
             </div>
           )}
 
@@ -551,11 +551,11 @@ export default function Home() {
               </svg>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center py-6 sm:py-10">
 
               {/* Hero Left Column */}
               <motion.div
-                className="lg:col-span-6 z-10"
+                className="lg:col-span-6 z-10 text-center lg:text-left flex flex-col items-center lg:items-start"
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
@@ -565,18 +565,18 @@ export default function Home() {
                   Intimate Stage &bull; Live Drama Troupe
                 </motion.div>
 
-                <motion.h1 variants={staggerItem} className="text-5xl sm:text-6xl xl:text-[68px] leading-[1.08] font-extrabold text-white tracking-tight mb-5">
+                <motion.h1 variants={staggerItem} className="text-4xl sm:text-6xl xl:text-[68px] leading-[1.08] font-extrabold text-white tracking-tight mb-5">
                   Intimate<br />
                   Stage Stories<br />
                   With <span className="text-yellow-400 drop-shadow-[0_0_25px_rgba(250,204,21,0.45)] ">Thespians</span>
                 </motion.h1>
 
-                <motion.p variants={staggerItem} className="text-sm sm:text-base text-slate-300 max-w-md font-medium leading-relaxed mb-8">
+                <motion.p variants={staggerItem} className="text-sm sm:text-base text-slate-300 max-w-md font-medium leading-relaxed mb-8 mx-auto lg:mx-0">
                   Experience raw emotion, gripping dialogue, and spellbinding live acting. A dedicated drama ensemble performing heartfelt classics and boundary-pushing original plays in our 120-seat theater.
                 </motion.p>
 
                 {/* Actions & Socials */}
-                <motion.div variants={staggerItem} className="flex flex-wrap items-center gap-6 mb-16">
+                <motion.div variants={staggerItem} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6 mb-12 sm:mb-16 w-full">
                   <a
                     href="#events"
                     className="px-7 py-3 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-bold text-xs tracking-wider shadow-lg shadow-amber-400/20 hover:brightness-110 transition uppercase duration-200 cursor-pointer active:scale-95 inline-flex items-center gap-2"
@@ -610,44 +610,44 @@ export default function Home() {
                 </motion.div>
 
                 {/* Theatrical Counters */}
-                <motion.div variants={staggerItem} className="flex items-start gap-10 sm:gap-12 pt-3 border-t border-slate-800">
+                <motion.div variants={staggerItem} className="flex flex-wrap sm:flex-nowrap justify-center lg:justify-start items-center sm:items-start gap-6 sm:gap-12 pt-4 border-t border-slate-800/80 text-center sm:text-left w-full">
                   <div>
                     <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">42+</div>
-                    <p className="text-xs text-slate-400 font-medium max-w-[140px] mt-1 leading-snug">Original plays &amp; classic adaptations staged</p>
+                    <p className="text-xs text-slate-400 font-medium max-w-[140px] mt-1 leading-snug mx-auto sm:mx-0">Original plays &amp; classic adaptations staged</p>
                   </div>
                   <div>
                     <div className="text-3xl sm:text-4xl font-extrabold text-amber-400 tracking-tight">120</div>
-                    <p className="text-xs text-slate-400 font-medium max-w-[140px] mt-1 leading-snug">Seat intimate theater with perfect sightlines</p>
+                    <p className="text-xs text-slate-400 font-medium max-w-[140px] mt-1 leading-snug mx-auto sm:mx-0">Seat intimate theater with perfect sightlines</p>
                   </div>
                   <div>
                     <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">98%</div>
-                    <p className="text-xs text-slate-400 font-medium max-w-[130px] mt-1 leading-snug">Standing ovation &amp; sellout attendance</p>
+                    <p className="text-xs text-slate-400 font-medium max-w-[130px] mt-1 leading-snug mx-auto sm:mx-0">Standing ovation &amp; sellout attendance</p>
                   </div>
                 </motion.div>
               </motion.div>
 
               {/* Hero Right Column (Stage Model & Floating Glass Cards) */}
               <motion.div
-                className="lg:col-span-6 relative flex justify-center items-center"
+                className="lg:col-span-6 relative flex justify-center items-center mt-6 lg:mt-0"
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
               >
                 {/* Main Hero Stage Drama Card */}
-                <motion.div variants={scaleFade} className="relative w-full max-w-[440px] h-[540px] rounded-[55px] overflow-hidden glass-card p-2 shadow-2xl border border-white/20 shadow-amber-950/30">
+                <motion.div variants={scaleFade} className="relative w-full max-w-[340px] sm:max-w-[440px] h-[440px] sm:h-[540px] rounded-[40px] sm:rounded-[55px] overflow-hidden glass-card p-2 shadow-2xl border border-white/20 shadow-amber-950/30">
                   <img
                     src="https://i.pinimg.com/736x/aa/71/26/aa712695fbd969e1b23f31e16dd1645d.jpg"
                     alt="Intense stage actor under warm theater spotlight in dramatic performance"
-                    className="w-full h-full object-cover rounded-[48px] brightness-95 contrast-110"
+                    className="w-full h-full object-cover rounded-[34px] sm:rounded-[48px] brightness-95 contrast-110"
                   />
 
                   {/* Stage Lighting Overlay Gradients */}
-                  <div className="absolute inset-0 rounded-[48px] bg-gradient-to-t from-black/80 via-transparent to-amber-500/10 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-[34px] sm:rounded-[48px] bg-gradient-to-t from-black/80 via-transparent to-amber-500/10 pointer-events-none" />
 
                 </motion.div>
 
                 {/* Glassmorphism Floating Badge 1: Performance Schedule & Occupancy */}
-                <motion.div variants={popIn} className="absolute -top-4 right-4 sm:right-6 glass-card-sm p-4 rounded-3xl shadow-2xl border border-white/20 w-48 z-20 hover:scale-105 transition-transform backdrop-blur-xl bg-slate-900/60">
+                <motion.div variants={popIn} className="absolute -top-3 sm:-top-4 right-1 sm:right-6 glass-card-sm p-3 sm:p-4 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/20 w-42 sm:w-48 z-20 hover:scale-105 transition-transform backdrop-blur-xl bg-slate-900/80">
                   <div className="flex items-center justify-between">
                     <div className="text-[10px] font-bold text-amber-400 tracking-wider uppercase">Curtain Calls</div>
                     <span className="text-[8px] bg-red-500/20 text-red-400 font-bold px-1.5 py-0.5 rounded-full border border-red-500/30">HOT</span>
@@ -671,7 +671,7 @@ export default function Home() {
                 </motion.div>
 
                 {/* Glassmorphism Floating Badge 2: Theater Patrons & Ovations */}
-                <motion.div variants={popIn} className="absolute bottom-8 -left-4 sm:left-4 glass-card-sm py-2 px-4 rounded-2xl shadow-2xl border border-white/20 flex items-center gap-3 z-20 hover:scale-105 transition-transform backdrop-blur-xl bg-slate-900/60">
+                <motion.div variants={popIn} className="absolute bottom-4 sm:bottom-8 left-1 sm:left-4 glass-card-sm py-2 px-3 sm:px-4 rounded-xl sm:rounded-2xl shadow-2xl border border-white/20 flex items-center gap-2 sm:gap-3 z-20 hover:scale-105 transition-transform backdrop-blur-xl bg-slate-900/80">
                   <div>
                     <div className="text-[9px] font-bold text-slate-300 uppercase tracking-wider">Theater Patrons</div>
                     <div className="flex items-center -space-x-2 mt-1">
@@ -751,27 +751,18 @@ export default function Home() {
                 </div>
 
                 {/* Event Name & 3 Detail Cards (Venue, Time, Date/Recommended) */}
-                <div className="lg:col-span-7 flex flex-col justify-center">
-                  <div className="flex flex-wrap items-center gap-2 mb-3">
-                    {/* <div className="inline-block px-3 py-1 rounded-full bg-yellow-400 text-slate-950 font-extrabold text-[10px] tracking-wider uppercase shadow-md shadow-yellow-400/20">
-                      UPCOMING
-                    </div>
-                    <span className="text-[10px] font-bold text-amber-300 uppercase tracking-widest bg-amber-400/10 border border-amber-400/30 px-3 py-1 rounded-full backdrop-blur-xs">
-                      NEW FEATURE PRODUCTION
-                    </span> */}
-                  </div>
-
+                <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left justify-center">
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight mb-3">
                     Echoes of the <span className="text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">Velvet Curtain</span>
                   </h3>
 
-                  <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed mb-8 max-w-lg drop-shadow-sm">
+                  <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed mb-8 max-w-lg drop-shadow-sm mx-auto lg:mx-0">
                     A gripping original drama exploring secrets, ambition, and redemption on our intimate stage. Directed by our resident ensemble with live chamber score and 120-seat acoustic perfection.
                   </p>
 
-                  <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-md">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full max-w-md mx-auto lg:mx-0">
                     {/* Card 1: Event Venue */}
-                    <div className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center aspect-square shadow-lg border border-white/15 hover:border-amber-400/50 hover:bg-white/[0.10] transition-all duration-300 hover:scale-105 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] group">
+                    <div className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center sm:aspect-square shadow-lg border border-white/15 hover:border-amber-400/50 hover:bg-white/[0.10] transition-all duration-300 hover:scale-105 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] group">
                       <div className="w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 mb-2 group-hover:scale-110 transition-transform">
                         <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -784,7 +775,7 @@ export default function Home() {
                     </div>
 
                     {/* Card 2: Time / Showtimes */}
-                    <div className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center aspect-square shadow-lg border border-white/15 hover:border-amber-400/50 hover:bg-white/[0.10] transition-all duration-300 hover:scale-105 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] group">
+                    <div className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center sm:aspect-square shadow-lg border border-white/15 hover:border-amber-400/50 hover:bg-white/[0.10] transition-all duration-300 hover:scale-105 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] group">
                       <div className="w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 mb-2 group-hover:scale-110 transition-transform">
                         <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                           <circle cx="12" cy="12" r="9" />
@@ -797,7 +788,7 @@ export default function Home() {
                     </div>
 
                     {/* Card 3: Date & Recommended Badge */}
-                    <div className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center aspect-square shadow-lg border border-white/15 relative group cursor-pointer hover:border-amber-400/60 hover:bg-white/[0.10] transition-all duration-300 hover:scale-105 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
+                    <div className="bg-white/[0.05] backdrop-blur-xl rounded-2xl p-4 flex flex-col items-center justify-center text-center sm:aspect-square shadow-lg border border-white/15 relative group cursor-pointer hover:border-amber-400/60 hover:bg-white/[0.10] transition-all duration-300 hover:scale-105 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]">
                       <div className="w-10 h-10 rounded-full bg-red-500/10 border border-red-400/30 flex items-center justify-center text-amber-400 mb-2 group-hover:scale-110 transition-transform">
                         <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                           <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
@@ -808,9 +799,6 @@ export default function Home() {
                       </div>
                       <span className="text-[9px] uppercase font-bold text-amber-400 tracking-wider">DATES</span>
                       <span className="text-[11px] font-bold text-white leading-tight mt-0.5">Oct 24 - Nov 12</span>
-                      {/* <div className="absolute -bottom-2.5 bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 text-[9px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md shadow-yellow-400/30 group-hover:scale-105 transition-transform">
-                        <span>★ Recommended</span>
-                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -827,7 +815,7 @@ export default function Home() {
           SECTION 3: ABOUT OUR ENSEMBLE & THEATER
           Background: bg-section-meals (--bg-meals: #181f2e)
          ========================================================= */}
-      <section id="about" className="w-full bg-section-meals py-20 relative z-10 border-y border-slate-800/80 transition-colors" style={{ paddingTop: '300px', marginTop: '-300px', zIndex: 1 }}>
+      <section id="about" className="w-full bg-section-meals py-16 sm:py-24 relative z-10 border-y border-slate-800/80 transition-colors" style={{ paddingTop: '300px', marginTop: '-300px', zIndex: 1 }}>
         {/* Decorative subtle radial glow */}
         <div className="absolute top-1/2 right-10 -translate-y-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -836,18 +824,18 @@ export default function Home() {
 
             {/* Left Content */}
             <motion.div
-              className="lg:col-span-6"
+              className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left"
               variants={slideFromLeft}
               initial="hidden"
               whileInView="visible"
               viewport={replayViewport}
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-4">
                 <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
                   Crafting stories that<br />
                   move the <span className="text-yellow-400 font-semibold italic drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">soul</span>
                 </h2>
-                <div className="w-12 h-12 flex-shrink-0 text-amber-500/40">
+                <div className="w-12 h-12 flex-shrink-0 text-amber-500/40 hidden sm:block">
                   <svg className="w-full h-full" viewBox="0 0 100 100">
                     <g stroke="currentColor" strokeLinecap="round" strokeWidth="2.5">
                       <line x1="50" x2="50" y1="5" y2="25" />
@@ -864,14 +852,14 @@ export default function Home() {
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed mb-8 max-w-md">
+              <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed mb-8 max-w-md mx-auto lg:mx-0">
                 Thespian Theater is a passionate, close-knit drama ensemble dedicated to bringing raw, authentic stories to life. Founded in our intimate 120-seat heritage hall, we produce original plays and classic adaptations that challenge, inspire, and move our audiences. Every performance is a journey — come experience theatre the way it was meant to be felt.
               </p>
 
               {/* Founded Date & Explore Buttons */}
-              <div className="flex items-center gap-4 mb-10">
+              <div className="flex flex-wrap justify-center lg:justify-start items-center gap-4 mb-8 sm:mb-10 w-full">
                 <div
-                  className="rounded-2xl p-4 w-44 shadow-lg bg-gradient-to-r from-yellow-400 via-amber-400 to-amber-500 text-slate-950 shadow-yellow-500/25"
+                  className="rounded-2xl p-4 w-44 shadow-lg bg-gradient-to-r from-yellow-400 via-amber-400 to-amber-500 text-slate-950 shadow-yellow-500/25 text-left"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-sm">🎭</span>
@@ -883,7 +871,7 @@ export default function Home() {
 
                 <a
                   href="#start"
-                  className="rounded-2xl p-4 w-44 cursor-pointer transition-all duration-300 flex flex-col justify-center h-[100px] glass-card text-slate-200 border border-amber-400/40 hover:border-amber-400 hover:bg-slate-800/80 group"
+                  className="rounded-2xl p-4 w-44 cursor-pointer transition-all duration-300 flex flex-col justify-center h-[100px] glass-card text-slate-200 border border-amber-400/40 hover:border-amber-400 hover:bg-slate-800/80 group text-left"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-sm">📜</span>
@@ -898,7 +886,7 @@ export default function Home() {
               </div>
 
               {/* Artistic Director Signature */}
-              <div className="pt-2">
+              <div className="pt-2 flex flex-col items-center lg:items-start text-center lg:text-left">
                 <div className="font-signature text-3xl text-amber-300 leading-none tracking-wide">Mr. Maduranga Weerasingha</div>
                 <div className="text-[10px] text-slate-400 font-medium tracking-tight mt-1">Artistic Director &amp; Founder, Thespian Theater</div>
               </div>
@@ -989,7 +977,7 @@ export default function Home() {
           <span className="opacity-40">THESPIANS</span>
         </div>
       </motion.div>
-      <section id="start" className="w-full bg-section-yoga py-8 relative z-10 transition-colors overflow-hidden">
+      <section id="start" className="w-full bg-section-yoga py-8 sm:py-16 relative z-10 transition-colors overflow-hidden">
         {/* Ambient background glows */}
         <div className="absolute top-1/3 left-[-150px] w-[500px] h-[500px] bg-gradient-to-r from-amber-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-[-100px] w-[400px] h-[400px] bg-red-900/5 rounded-full blur-3xl pointer-events-none" />
@@ -997,7 +985,7 @@ export default function Home() {
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
 
           {/* Two-column layout: Carousel Left + Details Right */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center relative" style={{ minHeight: 640 }}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center relative min-h-[580px] lg:min-h-[640px]">
 
             {/* ── Left Column: Vertical Angled Card Stack ── */}
             <motion.div
@@ -1006,20 +994,18 @@ export default function Home() {
               initial="hidden"
               whileInView="visible"
               viewport={replayViewportSmall}
-              className="lg:col-span-5 relative flex justify-center items-center select-none cursor-ns-resize"
-              style={{ height: 660, perspective: '1200px', touchAction: 'none' }}
+              className="lg:col-span-5 relative flex justify-center items-center select-none cursor-ns-resize h-[540px] sm:h-[660px]"
+              style={{ perspective: '1200px', touchAction: 'none' }}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
             >
               {/* Top gradient fade overlay */}
               <div
                 className="absolute top-0 left-0 right-0 h-36 z-30 pointer-events-none"
-              // style={{ background: 'linear-gradient(to bottom, #0f131c 0%, rgba(15, 19, 28, 0.85) 0%, transparent 100%)' }}
               />
               {/* Bottom gradient fade overlay */}
               <div
                 className="absolute bottom-0 left-0 right-0 h-36 z-30 pointer-events-none"
-              // style={{ background: 'linear-gradient(to top, #0f131c 0%, rgba(15, 19, 28, 0.85) 0%, transparent 100%)' }}
               />
 
               {/* Card Stack Container */}
@@ -1078,9 +1064,8 @@ export default function Home() {
                       }}
                       className={`absolute left-1/2 ${isTop || isBottom ? 'cursor-pointer hover:opacity-75' : ''}`}
                       style={{
-                        width: 380,
-                        // height: '500px',
-                        marginLeft: -190,
+                        width: 'min(360px, calc(100vw - 48px))',
+                        marginLeft: 'calc(-1 * min(180px, calc((100vw - 48px) / 2)))',
                         transform: cardTransform,
                         opacity: cardOpacity,
                         filter: cardFilter,
@@ -1092,28 +1077,20 @@ export default function Home() {
                     >
                       {/* Card Body */}
                       <div
-                        className="rounded-[36px] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.65)] border border-white/15 p-4 group"
+                        className="rounded-[36px] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.65)] border border-white/15 p-4 group w-full"
                         style={{
                           background: 'rgba(18, 24, 38, 0.85)',
                           backdropFilter: 'blur(20px)',
-                          width: '360px'
                         }}
                       >
                         {/* Card Image */}
-                        <div className="rounded-[24px] overflow-hidden w-full shadow-md relative bg-slate-950" style={{ height: '385px' }}>
+                        <div className="rounded-[24px] overflow-hidden w-full shadow-md relative bg-slate-950 h-[300px] sm:h-[385px]">
                           <img
                             src={card.imgSrc}
                             alt={card.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
-                        {/* Card Pill Label */}
-                        {/* <div className="pt-4 pb-1 flex justify-center">
-                          <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/95 text-slate-950 shadow-md text-xs font-bold tracking-tight hover:scale-105 transition-transform">
-                            <span className="truncate max-w-[220px]">{card.title}</span>
-                            <span className="text-amber-500 font-extrabold text-sm">&rarr;</span>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   );
@@ -1127,10 +1104,10 @@ export default function Home() {
               initial="hidden"
               whileInView="visible"
               viewport={replayViewport}
-              className="lg:col-span-7 flex flex-col justify-center relative pl-0 lg:pl-12"
+              className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left justify-center relative pl-0 lg:pl-12"
             >
 
-              {/* Up/Down Nav Buttons — positioned at the right edge */}
+              {/* Up/Down Nav Buttons — positioned at the right edge (desktop) */}
               <div className="absolute right-0 top-0 bottom-0 flex-col justify-between items-end py-4 hidden lg:flex" style={{ zIndex: 30 }}>
                 <button
                   onClick={() => handleProductionNav("up")}
@@ -1153,7 +1130,7 @@ export default function Home() {
               </div>
 
               {/* Mobile Nav Buttons */}
-              <div className="flex lg:hidden gap-3 mb-6 justify-end">
+              <div className="flex lg:hidden gap-3 mb-6 justify-center">
                 <button
                   onClick={() => handleProductionNav("up")}
                   className="w-12 h-10 rounded-2xl bg-slate-900/80 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:bg-amber-400 hover:text-slate-950 transition-all cursor-pointer active:scale-95"
@@ -1175,7 +1152,7 @@ export default function Home() {
               </div>
 
               {/* Production Text Content (synced with carousel) */}
-              <div className="max-w-lg">
+              <div className="max-w-lg mx-auto lg:mx-0 flex flex-col items-center lg:items-start text-center lg:text-left">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentProduction}
@@ -1183,27 +1160,28 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -15 }}
                     transition={{ duration: 0.35, ease: theatricalEase }}
+                    className="flex flex-col items-center lg:items-start text-center lg:text-left"
                   >
                     {/* Genre Pill */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-5">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-4 sm:mb-5">
                       <span>{productionCards[currentProduction].emoji}</span>
                       {productionCards[currentProduction].genre}
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-[1.12] mb-6">
+                    <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-white tracking-tight leading-[1.12] mb-4 sm:mb-6">
                       {productionCards[currentProduction].title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm sm:text-[15px] text-slate-300 font-medium leading-relaxed mb-8">
+                    <p className="text-xs sm:text-sm lg:text-[15px] text-slate-300 font-medium leading-relaxed mb-6 sm:mb-8">
                       {productionCards[currentProduction].description}
                     </p>
                   </motion.div>
                 </AnimatePresence>
 
                 {/* VIEW DETAILS Button */}
-                <button className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-bold text-xs tracking-widest uppercase shadow-lg shadow-amber-400/20 hover:brightness-110 transition-all cursor-pointer active:scale-95 inline-flex items-center gap-2">
+                <button className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-bold text-xs tracking-widest uppercase shadow-lg shadow-amber-400/20 hover:brightness-110 transition-all cursor-pointer active:scale-95 inline-flex items-center gap-2 mx-auto lg:mx-0">
                   VIEW DETAILS
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -1223,7 +1201,7 @@ export default function Home() {
           SECTION 5: OUR TEAM / ENSEMBLE
           Background: bg-section-yoga (--bg-yoga: #0f131c)
          ========================================================= */}
-      <section id="team" className="w-full bg-section-meals py-24 relative z-10 transition-colors overflow-hidden border-t border-b border-slate-800/80">
+      <section id="team" className="w-full bg-section-meals py-16 sm:py-24 relative z-10 transition-colors overflow-hidden border-t border-b border-slate-800/80">
         {/* Ambient glow */}
         <div className="absolute top-0 right-[-100px] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-[-100px] w-[400px] h-[400px] bg-red-900/8 rounded-full blur-3xl pointer-events-none" />
@@ -1236,9 +1214,9 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={replayViewport}
-            className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10"
+            className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 text-center md:text-left"
           >
-            <motion.div variants={staggerItem}>
+            <motion.div variants={staggerItem} className="flex flex-col items-center md:items-start">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                 The People Behind the Curtain
@@ -1249,15 +1227,12 @@ export default function Home() {
               </h2>
             </motion.div>
 
-            <motion.div variants={staggerItem} className="max-w-lg">
+            <motion.div variants={staggerItem} className="max-w-lg mx-auto md:mx-0 text-center md:text-left">
               <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed mb-4">
                 Meet the vibrant core of Thespian Theater — a collective of actors, directors, and storytellers bound by a shared passion for the stage. Each member brings unique energy, depth, and artistic vision, making our ensemble a dynamic force in the local theatre scene. Together, we create magic that resonates long after the curtain falls.
               </p>
             </motion.div>
           </motion.div>
-
-          {/* Carousel Category Tabs & Arrow Controls */}
-
 
           {/* Carousel Wrapper with Side Floating Navigation Arrows */}
           <div className="relative group/carousel my-4">
@@ -1266,9 +1241,9 @@ export default function Home() {
             <button
               onClick={() => scrollTeam("left")}
               aria-label="Previous Ensemble Members"
-              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/95 border border-slate-700/90 text-white hover:text-yellow-400 hover:bg-slate-800 hover:border-amber-400/60 hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-2xl backdrop-blur-md cursor-pointer active:scale-95"
+              className="absolute -left-2 sm:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/95 border border-slate-700/90 text-white hover:text-yellow-400 hover:bg-slate-800 hover:border-amber-400/60 hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-2xl backdrop-blur-md cursor-pointer active:scale-95"
             >
-              <svg className="w-6 h-6 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
@@ -1277,9 +1252,9 @@ export default function Home() {
             <button
               onClick={() => scrollTeam("right")}
               aria-label="Next Ensemble Members"
-              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-900/95 border border-slate-700/90 text-white hover:text-yellow-400 hover:bg-slate-800 hover:border-amber-400/60 hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-2xl backdrop-blur-md cursor-pointer active:scale-95"
+              className="absolute -right-2 sm:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/95 border border-slate-700/90 text-white hover:text-yellow-400 hover:bg-slate-800 hover:border-amber-400/60 hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-2xl backdrop-blur-md cursor-pointer active:scale-95"
             >
-              <svg className="w-6 h-6 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-none stroke-current" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -1313,10 +1288,10 @@ export default function Home() {
                         transformStyle: 'preserve-3d',
                         transition: isHovered ? 'transform 0.15s ease-out' : 'transform 0.5s ease-out'
                       }}
-                      className="group w-[260px] sm:w-[280px] md:w-[300px] h-[480px] bg-[#131927]/90 rounded-2xl overflow-hidden relative border border-slate-800/90 shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 hover:bg-[#1a2336] hover:border-amber-400/40 transition-all duration-500 cursor-pointer flex flex-col justify-between"
+                      className="group w-[250px] sm:w-[280px] md:w-[300px] h-[450px] sm:h-[480px] bg-[#131927]/90 rounded-2xl overflow-hidden relative border border-slate-800/90 shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 hover:bg-[#1a2336] hover:border-amber-400/40 transition-all duration-500 cursor-pointer flex flex-col justify-between"
                     >
                       {/* Top Text Info: Role & Name */}
-                      <div className="p-6 pt-7 z-10">
+                      <div className="p-5 sm:p-6 pt-6 sm:pt-7 z-10 text-left">
                         <span className="block text-[11px] font-bold text-amber-400/90 tracking-wider uppercase mb-1">
                           {member.role}
                         </span>
@@ -1326,7 +1301,7 @@ export default function Home() {
                       </div>
 
                       {/* Cutout Portrait Image */}
-                      <div className="relative w-full h-[340px] mt-auto overflow-hidden flex items-end justify-center">
+                      <div className="relative w-full h-[310px] sm:h-[340px] mt-auto overflow-hidden flex items-end justify-center">
                         <img
                           src={member.imgSrc}
                           alt={member.name}
@@ -1370,7 +1345,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Bottom CTA Button (Using Brand Default Yellow Button Design) */}
+          {/* Bottom CTA Button */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -1393,7 +1368,7 @@ export default function Home() {
           SECTION 6: SHOWTIMES TICKER & EVENTS
           Background: bg-section-events (--bg-events: #181f2e)
          ========================================================= */}
-      <section id="events" className="w-full bg-section-yoga py-20 relative z-10 border-t border-slate-800/80 transition-colors">
+      <section id="events" className="w-full bg-section-yoga py-16 sm:py-20 relative z-10 border-t border-slate-800/80 transition-colors">
 
         {/* Centered Yellow Badge & Centered Section Header */}
         <motion.div
@@ -1468,31 +1443,31 @@ export default function Home() {
             <motion.div
               key={evt.id}
               variants={staggerItem}
-              className="py-7 flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:bg-slate-900/50 px-4 sm:px-6 rounded-2xl transition-all duration-300 border border-transparent hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-500/5 group"
+              className="py-6 sm:py-7 flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6 hover:bg-slate-900/50 px-4 sm:px-6 rounded-2xl transition-all duration-300 border border-transparent hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-500/5 group text-center lg:text-left"
             >
               {/* Event ID & Title */}
-              <div className="flex items-baseline gap-6 lg:w-5/12">
-                <span className="text-sm font-bold text-amber-400/80 group-hover:text-amber-300 transition-colors">{evt.id}</span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight group-hover:text-yellow-300 transition-colors">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 sm:gap-6 lg:w-5/12 text-center sm:text-left">
+                <span className="text-sm font-bold text-amber-400/80 group-hover:text-amber-300 transition-colors shrink-0">{evt.id}</span>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-tight group-hover:text-yellow-300 transition-colors">
                   {evt.line1} {evt.line2}
                 </h3>
               </div>
 
               {/* NEW COLUMN: Event Type (Drama, Workshop, Thriller, etc.) */}
-              <div className="lg:w-3/12">
+              <div className="flex justify-center lg:justify-start lg:w-3/12">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-bold tracking-wide group-hover:border-amber-400/60 transition-colors">
                   🎭 {evt.type}
                 </span>
               </div>
 
               {/* Date & Location */}
-              <div className="text-xs font-medium text-slate-300 lg:w-3/12">
+              <div className="text-xs font-medium text-slate-300 lg:w-3/12 text-center lg:text-left">
                 <span className="text-white font-bold block mb-0.5">{evt.date}</span>
                 <span className="text-slate-400">{evt.location}</span>
               </div>
 
               {/* More Details Button */}
-              <div className="lg:w-2/12 flex lg:justify-end">
+              <div className="lg:w-2/12 flex justify-center lg:justify-end">
                 <button
                   onClick={() => handleReserve(evt.title)}
                   className={`px-6 py-2.5 rounded-full border text-xs font-bold transition-all whitespace-nowrap cursor-pointer active:scale-95 shadow-md flex items-center gap-1.5 ${
@@ -1517,7 +1492,7 @@ export default function Home() {
           SECTION 7: CONTACT US FORM
           Background: bg-section-meals (--bg-meals: #181f2e)
          ========================================================= */}
-      <section id="contact" className="w-full bg-section-meals py-24 relative z-10 overflow-hidden border-t border-slate-800/80 transition-colors">
+      <section id="contact" className="w-full bg-section-meals py-16 sm:py-24 relative z-10 overflow-hidden border-t border-slate-800/80 transition-colors">
         {/* Ambient Glows */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -1530,7 +1505,7 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={replayViewport}
-            className="w-full bg-slate-900/60 backdrop-blur-xl rounded-[36px] sm:rounded-[48px] border border-slate-800/80 shadow-2xl p-6 sm:p-12 lg:p-16 relative overflow-hidden"
+            className="w-full bg-slate-900/60 backdrop-blur-xl rounded-[32px] sm:rounded-[48px] border border-slate-800/80 shadow-2xl p-6 sm:p-10 lg:p-16 relative overflow-hidden"
           >
             
             {/* Top Left Symbol (Matching reference picture icon mark) */}
@@ -1538,7 +1513,7 @@ export default function Home() {
               <span className="w-6 h-6 rounded-full border-2 border-amber-400 border-t-transparent animate-spin inline-block" />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
               
               {/* Left Column: Contact Form */}
               <motion.div
@@ -1546,7 +1521,7 @@ export default function Home() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={replayViewport}
-                className="lg:col-span-7"
+                className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left"
               >
                 <motion.div variants={staggerItem}>
                   <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold tracking-widest uppercase mb-4">
@@ -1555,21 +1530,21 @@ export default function Home() {
                   </div>
                 </motion.div>
 
-                <motion.h2 variants={staggerItem} className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+                <motion.h2 variants={staggerItem} className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
                   Contact <span className="text-yellow-400 font-semibold drop-shadow-[0_0_20px_rgba(250,204,21,0.35)]">us</span>
                 </motion.h2>
 
-                <motion.p variants={staggerItem} className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed mb-8 max-w-lg">
+                <motion.p variants={staggerItem} className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
                   Please don&apos;t hesitate to reach out to us whenever you need assistance with ticket reservations, private theater bookings, auditions, or press inquiries. We&apos;ll make sure to respond to you promptly.
                 </motion.p>
 
                 {formSubmitted ? (
-                  <motion.div variants={staggerItem} className="p-6 rounded-2xl bg-amber-400/10 border border-amber-400/30 text-amber-300 text-sm font-bold flex items-center gap-3 animate-fadeIn">
-                    <span className="w-8 h-8 rounded-full bg-yellow-400 text-slate-950 flex items-center justify-center font-black">✓</span>
+                  <motion.div variants={staggerItem} className="p-6 rounded-2xl bg-amber-400/10 border border-amber-400/30 text-amber-300 text-sm font-bold flex items-center gap-3 animate-fadeIn w-full">
+                    <span className="w-8 h-8 rounded-full bg-yellow-400 text-slate-950 flex items-center justify-center font-black shrink-0">✓</span>
                     Thank you! Your message has been sent to our Box Office. We will get back to you promptly.
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleContactSubmit} className="space-y-6">
+                  <form onSubmit={handleContactSubmit} className="space-y-6 w-full text-left">
                     <motion.div variants={staggerItem}>
                       <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
                         Name
@@ -1629,15 +1604,15 @@ export default function Home() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={replayViewport}
-                className="lg:col-span-5 relative"
+                className="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-none"
               >
-                {/* Yellow/Amber Decorative Top-Right Corner Block & Bottom Dot (Matching reference layout) */}
+                {/* Yellow/Amber Decorative Top-Right Corner Block & Bottom Dot */}
                 <div className="absolute -top-6 -right-6 w-3/4 h-full bg-yellow-400 rounded-3xl -z-10 transform translate-x-3 translate-y-3 hidden sm:block shadow-lg" />
                 <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-yellow-400 rounded-full -z-10 hidden sm:block shadow-md" />
 
                 {/* Dark Info Box */}
-                <div className="bg-[#0f1420] border border-slate-800/90 p-8 sm:p-10 rounded-[32px] shadow-2xl text-white relative">
-                  <h3 className="text-3xl font-extrabold text-white mb-8 tracking-tight">
+                <div className="bg-[#0f1420] border border-slate-800/90 p-6 sm:p-8 lg:p-10 rounded-[32px] shadow-2xl text-white relative">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-6 sm:mb-8 tracking-tight text-center sm:text-left">
                     Info
                   </h3>
 
@@ -1649,7 +1624,7 @@ export default function Home() {
                     className="space-y-6"
                   >
                     {/* Email */}
-                    <motion.div variants={staggerItem} className="flex items-center gap-4">
+                    <motion.div variants={staggerItem} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
                       <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
                         <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -1664,7 +1639,7 @@ export default function Home() {
                     </motion.div>
 
                     {/* Phone */}
-                    <motion.div variants={staggerItem} className="flex items-center gap-4">
+                    <motion.div variants={staggerItem} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
                       <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
                         <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -1679,7 +1654,7 @@ export default function Home() {
                     </motion.div>
 
                     {/* Address */}
-                    <motion.div variants={staggerItem} className="flex items-center gap-4">
+                    <motion.div variants={staggerItem} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
                       <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
                         <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -1695,7 +1670,7 @@ export default function Home() {
                     </motion.div>
 
                     {/* Hours */}
-                    <motion.div variants={staggerItem} className="flex items-center gap-4">
+                    <motion.div variants={staggerItem} className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
                       <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
                         <svg className="w-5 h-5 fill-none stroke-current" strokeWidth="2" viewBox="0 0 24 24">
                           <circle cx="12" cy="12" r="9" />
@@ -1733,15 +1708,16 @@ export default function Home() {
             initial="hidden"
             whileInView="visible"
             viewport={replayViewport}
-            className="flex justify-between items-center mb-8"
+            className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 sm:mb-12 text-center sm:text-left"
           >
-            <div className="flex items-center gap-6 text-[11px] font-semibold text-slate-500 tracking-tight">
+            <div className="flex flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-6 text-[11px] font-semibold text-slate-400 tracking-tight">
               <a href="#how-it-works" className="hover:text-amber-400 transition-colors">About</a>
               <a href="#start" className="hover:text-amber-400 transition-colors">Productions</a>
+              <a href="#team" className="hover:text-amber-400 transition-colors">Ensemble</a>
               <a href="#events" className="hover:text-amber-400 transition-colors">Showtimes</a>
               <a href="#contact" className="hover:text-amber-400 transition-colors">Contact</a>
             </div>
-            <p className="text-[11px] font-semibold text-slate-500 tracking-tight">
+            <p className="text-[11px] font-semibold text-slate-500 tracking-tight text-center sm:text-right">
               © 2025 Thespian Theater. All rights reserved.
             </p>
           </motion.div>
@@ -1750,7 +1726,7 @@ export default function Home() {
           <div className="relative flex items-center justify-between select-none">
 
             {/* Left Stylized Sunburst Motif */}
-            <div className="absolute -bottom-10 -left-12 w-48 h-48 opacity-20 pointer-events-none">
+            <div className="absolute -bottom-10 -left-12 w-48 h-48 opacity-20 pointer-events-none hidden sm:block">
               <svg className="w-full h-full text-amber-400" viewBox="0 0 100 100">
                 <g stroke="currentColor" strokeWidth="4">
                   <line x1="50" x2="10" y1="50" y2="10" />
@@ -1769,14 +1745,14 @@ export default function Home() {
               initial="hidden"
               whileInView="visible"
               viewport={replayViewport}
-              className="flex items-center tracking-tighter w-full justify-between overflow-hidden"
+              className="flex items-center tracking-tighter w-full justify-center lg:justify-between overflow-hidden text-center lg:text-left"
             >
-              <span className="text-[60px] sm:text-[100px] lg:text-[140px] font-black leading-none text-white tracking-tight inline-flex items-baseline drop-shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+              <span className="text-[32px] min-[380px]:text-[40px] sm:text-[76px] md:text-[100px] lg:text-[136px] font-black leading-none text-white tracking-tight inline-flex flex-wrap sm:flex-nowrap items-baseline justify-center lg:justify-start drop-shadow-[0_0_50px_rgba(255,255,255,0.05)]">
                 <span className="inline-block text-yellow-400 drop-shadow-[0_0_35px_rgba(250,204,21,0.4)]">Thespian</span>&nbsp;Theater
               </span>
 
               {/* Right Sunburst Motif in Footer */}
-              <div className="hidden sm:block w-36 h-36 opacity-25 pointer-events-none">
+              <div className="hidden lg:block w-36 h-36 opacity-25 pointer-events-none shrink-0">
                 <svg className="w-full h-full text-slate-500" viewBox="0 0 100 100">
                   <g stroke="currentColor" strokeWidth="3">
                     <line x1="50" x2="90" y1="50" y2="10" />
@@ -1800,7 +1776,7 @@ export default function Home() {
       {/* Reservation Confirmation Modal */}
       {modalEvent && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
-          <div className="glass-card bg-slate-900/95 rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center border border-slate-700">
+          <div className="glass-card bg-slate-900/95 rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl text-center border border-slate-700">
             <div className="w-12 h-12 rounded-full bg-yellow-400 text-slate-950 font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-[0_0_15px_rgba(250,204,21,0.5)]">
               ✓
             </div>
@@ -1820,28 +1796,101 @@ export default function Home() {
 
       {/* Team Member Bio Modal */}
       {selectedMember && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-fadeIn">
-          <div className="glass-card bg-slate-900/95 rounded-3xl overflow-hidden max-w-2xl w-full shadow-2xl border border-slate-700/80 flex flex-col md:flex-row relative">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-md p-0 sm:p-4 animate-fadeIn">
+          <div className="glass-card bg-slate-900/98 rounded-t-3xl sm:rounded-3xl overflow-hidden max-w-2xl w-full shadow-2xl border border-slate-700/80 flex flex-col md:flex-row relative max-h-[92vh] sm:max-h-[88vh]">
+
+            {/* Close Button */}
             <button
               onClick={() => setSelectedMember(null)}
               aria-label="Close modal"
-              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+              className="absolute top-3 right-4 z-30 w-8 h-8 rounded-full bg-slate-800/90 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-700 flex items-center justify-center transition-colors cursor-pointer text-sm font-bold shadow-md"
             >
               ✕
             </button>
 
+            {/* ── Mobile Layout (< md) ─────────────────── */}
+            <div className="flex flex-col md:hidden overflow-hidden">
+              {/* Drag Handle */}
+              <div className="flex justify-center pt-3 pb-0">
+                <div className="w-10 h-1 rounded-full bg-slate-600" />
+              </div>
+
+              {/* Compact header: small avatar + name */}
+              <div className="flex items-center gap-3 px-5 pt-3 pb-3 border-b border-slate-800/80">
+                <div className="w-14 h-14 rounded-2xl overflow-hidden bg-slate-800 shrink-0 border border-slate-700/80">
+                  <img
+                    src={selectedMember.imgSrc}
+                    alt={selectedMember.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="min-w-0 pr-8">
+                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[9px] font-bold uppercase tracking-wider mb-1">
+                    {selectedMember.displayRole}
+                  </span>
+                  <h3 className="text-base font-extrabold text-white leading-tight">
+                    {selectedMember.name}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Scrollable body */}
+              <div className="overflow-y-auto px-5 py-4 flex flex-col gap-4">
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {selectedMember.bio}
+                </p>
+
+                <div className="bg-slate-800/50 rounded-2xl p-4 border border-slate-700/50">
+                  <div className="text-[10px] uppercase tracking-wider font-bold text-amber-400 mb-2">
+                    Featured Productions
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedMember.plays.map((play: string, i: number) => (
+                      <span key={i} className="text-xs bg-slate-900 px-2.5 py-1 rounded-lg text-slate-200 font-medium">
+                        🎭 {play}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {selectedMember.quote && (
+                  <blockquote className="text-xs italic text-slate-400 border-l-2 border-amber-400 pl-3 py-1">
+                    &ldquo;{selectedMember.quote}&rdquo;
+                  </blockquote>
+                )}
+
+                <div className="flex flex-col gap-2.5 pt-4 border-t border-slate-800 pb-1">
+                  <span className="text-[11px] text-slate-400 font-semibold">
+                    Experience: <strong className="text-white">{selectedMember.experience}</strong>
+                  </span>
+                  <a
+                    href={`https://${selectedMember.facebook}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-center px-4 py-3 rounded-2xl bg-amber-400 text-slate-950 text-xs font-extrabold hover:bg-yellow-300 transition-colors inline-flex items-center justify-center gap-2 shadow-md shadow-amber-400/20"
+                  >
+                    <svg className="w-3.5 h-3.5 fill-current text-[#1877F2]" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook Profile
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Desktop Layout (>= md) ─────────────── */}
             {/* Left Portrait */}
-            <div className="w-full md:w-2/5 h-64 md:h-auto relative overflow-hidden bg-slate-950">
+            <div className="hidden md:block md:w-2/5 relative overflow-hidden bg-slate-950 shrink-0">
               <img
                 src={selectedMember.imgSrc}
                 alt={selectedMember.name}
                 className="w-full h-full object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-slate-950/80" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/80" />
             </div>
 
             {/* Right Details */}
-            <div className="w-full md:w-3/5 p-6 sm:p-8 flex flex-col justify-between">
+            <div className="hidden md:flex md:w-3/5 p-8 flex-col justify-between text-left overflow-y-auto">
               <div>
                 <span className="inline-block px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[10px] font-bold uppercase tracking-wider mb-3">
                   {selectedMember.displayRole}
@@ -1890,6 +1939,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
+
           </div>
         </div>
       )}
